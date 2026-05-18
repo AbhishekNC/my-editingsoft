@@ -36,6 +36,13 @@
       color: var(--text);
       overflow-x: hidden;
       line-height: 1.6;
+      /* BACKGROUND PATTERN */
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(0, 229, 255, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(124, 58, 237, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(244, 63, 142, 0.1) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(0, 229, 255, 0.05) 0px, transparent 50%);
+      background-attachment: fixed;
     }
 
     /* ─── NOISE OVERLAY ─── */
@@ -94,6 +101,30 @@
     }
     nav.scrolled { background: rgba(5,5,8,0.92); }
 
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+    }
+
+    .nav-logo-image {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.4s ease;
+    }
+
+    nav.scrolled .nav-logo-image {
+      opacity: 1;
+      transform: scale(1);
+      border-color: var(--cyan);
+    }
+
     .logo {
       font-family: var(--font-display);
       font-size: 1.5rem;
@@ -102,7 +133,6 @@
       background: linear-gradient(120deg, var(--cyan), var(--violet));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      cursor: pointer;
     }
 
     .nav-links {
@@ -497,44 +527,6 @@
     }
     .card p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
 
-    /* ─── DEEP FEATURE GRID ─── */
-    .deep-feature-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    .deep-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.75rem;
-      transition: border-color 0.3s;
-    }
-    .deep-card:hover { border-color: rgba(0,229,255,0.2); }
-    .deep-card h4 {
-      font-family: var(--font-display);
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.4rem;
-      letter-spacing: -0.02em;
-      color: var(--text);
-    }
-    .deep-card p { color: var(--muted); font-size: 0.875rem; line-height: 1.7; margin-bottom: 0.75rem; }
-    .deep-card ul { list-style: none; }
-    .deep-card ul li {
-      color: var(--muted);
-      font-size: 0.825rem;
-      padding: 0.25rem 0 0.25rem 1.25rem;
-      position: relative;
-    }
-    .deep-card ul li::before {
-      content: '›';
-      position: absolute; left: 0;
-      color: var(--cyan);
-      font-weight: bold;
-    }
-
     /* ─── GALLERY ─── */
     #gallery { padding: 100px 5%; border-top: 1px solid var(--border); }
     .gallery-inner { max-width: 1280px; margin: 0 auto; }
@@ -764,6 +756,124 @@
     }
     .demo-notice p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
 
+    /* ─── FREE PLAN ERROR MODAL ─── */
+    .free-plan-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+    }
+    .free-plan-modal.show { display: flex; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .free-modal-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      max-width: 480px;
+      width: 90%;
+      text-align: center;
+      animation: slideUp 0.4s ease;
+      position: relative;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .free-modal-spinner {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1.5rem;
+      position: relative;
+    }
+
+    .free-modal-spinner svg {
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .free-modal-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(120deg, var(--cyan), var(--violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .free-modal-text {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .free-modal-timer {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--cyan);
+      margin: 1rem 0;
+      letter-spacing: -0.04em;
+    }
+
+    .wifi-icon {
+      font-size: 4rem;
+      margin: 1.5rem 0;
+      opacity: 0.3;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.05); }
+    }
+
+    .free-modal-error-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+      color: #f87171;
+    }
+
+    .free-modal-btn {
+      margin-top: 1.5rem;
+      padding: 0.9rem 2rem;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .free-modal-btn:hover {
+      opacity: 0.88;
+      transform: translateY(-2px);
+    }
+
     /* ─── FOOTER ─── */
     footer {
       border-top: 1px solid var(--border);
@@ -772,7 +882,7 @@
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 1.5rem;
     }
     .footer-logo {
       font-family: var(--font-display);
@@ -782,6 +892,23 @@
       background: linear-gradient(120deg, var(--cyan), var(--violet));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .footer-image {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      object-fit: cover;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .footer-image:hover {
+      transform: scale(1.05);
+      border-color: var(--cyan);
     }
     footer p { color: var(--muted); font-size: 0.85rem; }
 
@@ -935,146 +1062,6 @@
       border-radius: 100px;
     }
 
-    /* ─── DETAIL HERO LAYOUT ─── */
-    .detail-hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
-      align-items: start;
-    }
-    .detail-hero-text .detail-tag {
-      display: inline-block;
-      background: rgba(0,229,255,0.08);
-      border: 1px solid rgba(0,229,255,0.2);
-      color: var(--cyan);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 3px 12px;
-      border-radius: 100px;
-      margin-bottom: 1rem;
-    }
-    .detail-hero-text h3 {
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 2.5vw, 2.1rem);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1.15;
-      margin-bottom: 0.75rem;
-    }
-    .detail-hero-text > p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-    }
-    .gc {
-      background: linear-gradient(120deg, var(--cyan), var(--violet));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-style: normal;
-    }
-
-    /* ─── DETAIL STEPS ─── */
-    .detail-steps { display: flex; flex-direction: column; gap: 0.75rem; }
-    .dstep {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      font-size: 0.875rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-    .dstep strong { color: var(--text); }
-    .dstep-num {
-      font-family: var(--font-display);
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: var(--cyan);
-      background: rgba(0,229,255,0.08);
-      border: 1px solid rgba(0,229,255,0.15);
-      border-radius: 6px;
-      padding: 2px 8px;
-      white-space: nowrap;
-      margin-top: 2px;
-    }
-
-    /* ─── EXPLAINER ITEMS ─── */
-    .detail-explainer { display: flex; flex-direction: column; gap: 0.75rem; }
-    .explainer-item {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-left: 2px solid rgba(0,229,255,0.4);
-      border-radius: 0 10px 10px 0;
-      padding: 0.85rem 1rem;
-      cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .explainer-item:hover { border-left-color: var(--cyan); background: rgba(0,229,255,0.04); }
-    .explainer-label {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.4rem;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .explainer-label::before {
-      content: '?';
-      width: 18px; height: 18px;
-      border-radius: 50%;
-      background: rgba(0,229,255,0.12);
-      border: 1px solid rgba(0,229,255,0.25);
-      color: var(--cyan);
-      font-size: 0.7rem;
-      font-weight: 900;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .explainer-body {
-      font-size: 0.825rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    /* ─── DETAIL CARDS COLUMN ─── */
-    .detail-cards-col { display: flex; flex-direction: column; gap: 1rem; }
-    .dcard {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.25rem;
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .dcard:hover { border-color: rgba(0,229,255,0.2); transform: translateX(4px); }
-    .dcard-icon {
-      font-size: 1.5rem;
-      width: 42px; height: 42px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, rgba(0,229,255,0.1), rgba(124,58,237,0.1));
-      border: 1px solid rgba(0,229,255,0.1);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .dcard-title {
-      font-family: var(--font-display);
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 0.3rem;
-      letter-spacing: -0.01em;
-    }
-    .dcard-body {
-      font-size: 0.825rem;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
       .mobile-menu-btn { display: block !important; }
@@ -1096,18 +1083,16 @@
       .mock-body { grid-template-columns: 1fr; }
       .mock-panel:not(:first-child) { display: none; }
       .cards-layout { grid-template-columns: 1fr 1fr; }
-      .ftab-content.active .detail-hero { grid-template-columns: 1fr; gap: 2rem; }
-      .deep-feature-grid { grid-template-columns: 1fr; }
       .gallery-grid { grid-template-columns: repeat(2,1fr); }
       .g-item.wide { grid-column: span 2; }
       .stats-row { grid-template-columns: repeat(2,1fr); }
       .pricing-grid { grid-template-columns: 1fr; }
-      .detail-hero { grid-template-columns: 1fr; }
       .photo-showcase { grid-template-columns: 1fr 1fr; }
       .photo-showcase.triple { grid-template-columns: 1fr 1fr; }
       .photo-showcase.hero-split { grid-template-columns: 1fr; }
       .feat-photo-row { grid-template-columns: 1fr; }
       .feat-photo-row.flip { direction: ltr; }
+      footer { flex-direction: column; text-align: center; }
     }
     @media (max-width: 600px) {
       .cards-layout { grid-template-columns: 1fr; }
@@ -1120,8 +1105,6 @@
         grid-row: span 1; 
       }
       .stats-row { grid-template-columns: 1fr 1fr; }
-      .feature-tabs { flex-direction: column; }
-      .ftab { border-right: none; border-bottom: 1px solid var(--border); }
       .photo-showcase, .photo-showcase.triple { grid-template-columns: 1fr; }
     }
 
@@ -1154,9 +1137,19 @@
   <div class="blob blob-3"></div>
 </div>
 
+<!-- FREE PLAN ERROR MODAL -->
+<div class="free-plan-modal" id="freePlanModal">
+  <div class="free-modal-box" id="freeModalContent">
+    <!-- Content will be injected by JavaScript -->
+  </div>
+</div>
+
 <!-- NAV -->
 <nav id="nav">
-  <div class="logo" data-scroll-to="home">Zenframe</div>
+  <div class="logo-wrapper" data-scroll-to="home">
+    <img src="https://messages-prod.27c852f3500f38c1e7786e2c9ff9e48f.r2.cloudflarestorage.com/019d9f6d-33c2-72f7-ab98-354d00929c8f/1778952601953-019e31d6-2d74-7738-a679-ac8a09d77044.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=b33de61d4f22a31b59b25364ab5037c5%2F20260516%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260516T173002Z&X-Amz-Expires=3600&X-Amz-Signature=e7a447c15ceb616ece10ab1485677f8749f82f10a632d1f2e8d2cb281fa60545&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject" alt="Zenframe Logo" class="nav-logo-image">
+    <div class="logo">Zenframe</div>
+  </div>
   <ul class="nav-links" id="navLinks">
     <li><a data-scroll-to="audio-section">Audio</a></li>
     <li><a data-scroll-to="photo-section">Photo</a></li>
@@ -1237,101 +1230,10 @@
       <h2><span class="grad-text">Audio</span> Editing</h2>
       <p>Studio-quality sound engineering at your fingertips</p>
     </div>
-    <div class="feature-tabs" id="audio-tabs">
-      <button class="ftab active" data-tab="audio" data-target="overview">Overview</button>
-      <button class="ftab" data-tab="audio" data-target="waveform">Waveform Studio</button>
-      <button class="ftab" data-tab="audio" data-target="mixing">Mixing Console</button>
-    </div>
-
-    <!-- AUDIO OVERVIEW -->
-    <div class="ftab-content active" id="audio-overview">
-      <div class="detail-hero reveal">
-        <div class="detail-hero-text">
-          <div class="detail-tag">All-in-One Audio Engine</div>
-          <h3>Everything you need to<br>make <em class="gc">pro audio</em></h3>
-          <p>Whether you're recording a podcast, mixing a full album, or mastering a film score — Zenframe's audio engine handles it all in one place. No plugins to install, no compatibility headaches.</p>
-          <div class="detail-steps">
-            <div class="dstep"><div class="dstep-num">01</div><div><strong>Record</strong> — Capture vocals, instruments, or system audio directly into the timeline</div></div>
-            <div class="dstep"><div class="dstep-num">02</div><div><strong>Mix</strong> — Balance levels, pan tracks, and apply real-time effects per channel</div></div>
-            <div class="dstep"><div class="dstep-num">03</div><div><strong>Master</strong> — Finalize loudness, apply limiting, and export broadcast-ready files</div></div>
-          </div>
-        </div>
-        <div class="detail-cards-col">
-          <div class="dcard"><div class="dcard-icon">🎚️</div><div><div class="dcard-title">Multi-Track Mixing</div><div class="dcard-body">Stack unlimited tracks — vocals, instruments, SFX, ambience. Each track has its own volume, pan, mute, and solo controls. Perfect for music production, podcasts, and film audio alike.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">🎛️</div><div><div class="dcard-title">Advanced Effects Chain</div><div class="dcard-body">Apply EQ, compression, reverb, delay, chorus, and saturation in a draggable effects chain per track. Hear changes in real time with zero-latency monitoring.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">🎙️</div><div><div class="dcard-title">Mastering Suite</div><div class="dcard-body">Hit streaming loudness targets (Spotify −14 LUFS, YouTube −13 LUFS) automatically. Built-in true peak limiter, stereo widener, and final EQ ensure every export sounds professional.</div></div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- AUDIO WAVEFORM -->
-    <div class="ftab-content" id="audio-waveform">
-      <div class="detail-hero reveal">
-        <div class="detail-hero-text">
-          <div class="detail-tag">Waveform Studio</div>
-          <h3>Edit audio down to the <em class="gc">single sample</em></h3>
-          <p>A waveform is the visual representation of your audio — peaks show loud moments, troughs show silence. Zenframe lets you zoom in to individual samples (1/44,100th of a second) for surgical precision.</p>
-          <div class="detail-explainer">
-            <div class="explainer-item">
-              <div class="explainer-label">What is a waveform?</div>
-              <div class="explainer-body">A waveform is a graph of sound over time. The height of each point represents volume — tall spikes are loud transients like drums or speech consonants, flat areas are silence or sustained notes.</div>
-            </div>
-            <div class="explainer-item">
-              <div class="explainer-label">What is sample-level editing?</div>
-              <div class="explainer-body">Audio is made of thousands of individual samples per second (usually 44,100 or 48,000). Editing at the sample level means you can remove a click, trim a breath, or fix a harsh sibilant to sub-millisecond accuracy.</div>
-            </div>
-            <div class="explainer-item">
-              <div class="explainer-label">What are markers & regions?</div>
-              <div class="explainer-body">Markers are flags you drop at key moments (e.g. "start of chorus"). Regions are spans of audio you group together — useful for looping a section, muting a chunk, or applying bulk edits.</div>
-            </div>
-          </div>
-        </div>
-        <div class="detail-cards-col">
-          <div class="dcard"><div class="dcard-icon">🔬</div><div><div class="dcard-title">Precision Editing</div><div class="dcard-body">Zoom into individual samples with the scroll wheel. Use the pencil tool to manually redraw problem audio — remove clicks, pops, and digital artifacts that other tools miss.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">▶️</div><div><div class="dcard-title">Zero-Latency Preview</div><div class="dcard-body">Press Space to play from any point instantly. Edit a clip and hear the result with no delay — Zenframe's audio engine pre-renders in the background so playback is always immediate.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">📌</div><div><div class="dcard-title">Markers, Regions & Cue Points</div><div class="dcard-body">Drop color-coded markers as you listen, draw regions around sections, and set cue points for podcast chapter navigation or film sync. Export markers as chapter data for YouTube or podcast apps.</div></div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- AUDIO MIXING -->
-    <div class="ftab-content" id="audio-mixing">
-      <div class="detail-hero reveal">
-        <div class="detail-hero-text">
-          <div class="detail-tag">Mixing Console</div>
-          <h3>A full studio mixer,<br><em class="gc">inside your browser</em></h3>
-          <p>The mixing console is where individual tracks come together into a cohesive sound. Think of it like a physical mixing board — each channel strip controls one track, and the master controls the final output going to your ears and your export.</p>
-          <div class="detail-explainer">
-            <div class="explainer-item">
-              <div class="explainer-label">What is a channel strip?</div>
-              <div class="explainer-body">A channel strip is a vertical column of controls for a single track. From top to bottom: input gain, EQ, compression, effects sends, pan knob, and fader. Every track gets its own strip — that's how you shape each element independently.</div>
-            </div>
-            <div class="explainer-item">
-              <div class="explainer-label">What is a fader?</div>
-              <div class="explainer-body">The fader is the main volume slider for a track. Automation lets you record fader movements over time — e.g. fade in a guitar at bar 8, dip the music under dialogue, then bring it back up.</div>
-            </div>
-            <div class="explainer-item">
-              <div class="explainer-label">What is the master bus?</div>
-              <div class="explainer-body">The master bus is the final stereo output — every track feeds into it. Apply limiting and metering here to ensure your mix doesn't clip and hits the right loudness level for your platform.</div>
-            </div>
-          </div>
-        </div>
-        <div class="detail-cards-col">
-          <div class="dcard"><div class="dcard-icon">🎰</div><div><div class="dcard-title">Virtual Mixer</div><div class="dcard-body">Drag faders, twist virtual knobs, and click solo/mute buttons just like a hardware console. Automate any parameter over time by drawing curves or recording your real-time movements.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">📻</div><div><div class="dcard-title">Full Channel Strips</div><div class="dcard-body">Every channel includes a 4-band parametric EQ, compressor with attack/release/ratio, a send to any of 4 aux buses, stereo panning, and a pre/post fader meter. No external plugins needed.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">📊</div><div><div class="dcard-title">Master Control & Metering</div><div class="dcard-body">Watch your levels in real time on the master VU meter and LUFS meter. The built-in limiter prevents clipping. One-click loudness normalise targets Spotify, Apple Music, YouTube, or custom targets.</div></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Audio Photo Showcase -->
-<div class="feature-section" style="padding-top:0;border-top:none">
-  <div class="feature-section-inner">
+    
     <div class="photo-showcase triple reveal">
       <div class="showcase-img short">
-        <img src="https://images.pexels.com/photos/3756766/pexels-photo-3756766.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Professional studio mixing console with faders and knobs" loading="lazy">
+        <img src="https://images.pexels.com/photos/3756766/pexels-photo-3756766.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Studio mixing console with faders and knobs" loading="lazy">
         <div class="img-label"><span>Multi-track</span> Professional mixing console</div>
       </div>
       <div class="showcase-img short">
@@ -1339,7 +1241,7 @@
         <div class="img-label"><span>Waveform</span> Precision sample editing</div>
       </div>
       <div class="showcase-img short">
-        <img src="https://images.pexels.com/photos/4571231/pexels-photo-4571231.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Podcast microphone with pop filter in recording studio" loading="lazy">
+        <img src="https://images.pexels.com/photos/6953876/pexels-photo-6953876.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Podcast microphone with pop filter in recording studio" loading="lazy">
         <div class="img-label"><span>Mastering</span> Broadcast-ready output</div>
       </div>
     </div>
@@ -1353,123 +1255,42 @@
       <h2><span class="grad-text">Photo</span> Editing</h2>
       <p>Transform your photos into stunning masterpieces</p>
     </div>
-    <div class="feature-tabs" id="photo-tabs">
-      <button class="ftab active" data-tab="photo" data-target="overview">Overview</button>
-      <button class="ftab" data-tab="photo" data-target="retouch">AI Retouching</button>
-      <button class="ftab" data-tab="photo" data-target="color">Color Grading</button>
-    </div>
-    <div class="ftab-content active" id="photo-overview">
-      <div class="detail-hero reveal">
-        <div class="detail-hero-text">
-          <div class="detail-tag">Photo Editing Engine</div>
-          <h3>From raw capture to<br><em class="gc">gallery-ready</em></h3>
-          <p>Zenframe handles every stage of photo post-processing — from lens correction and raw development to AI retouching and final color grade. Work non-destructively: every edit is undoable at any time.</p>
-          <div class="detail-steps">
-            <div class="dstep"><div class="dstep-num">01</div><div><strong>Import</strong> — Drag in JPGs, PNGs, RAW files (CR2, NEF, ARW). Zenframe decodes them natively.</div></div>
-            <div class="dstep"><div class="dstep-num">02</div><div><strong>Retouch</strong> — Use AI tools to clean up skin, remove objects, enhance eyes and lips automatically.</div></div>
-            <div class="dstep"><div class="dstep-num">03</div><div><strong>Grade</strong> — Apply curves, LUTs, and HSL adjustments for a cinematic look.</div></div>
-            <div class="dstep"><div class="dstep-num">04</div><div><strong>Export</strong> — Output to JPEG, PNG, TIFF, or WebP at any resolution with color profile embedding.</div></div>
+    
+    <div class="feat-photo-row reveal">
+      <div>
+        <div class="before-after" id="baSlider">
+          <div class="ba-after">
+            <img src="https://images.pexels.com/photos/1680140/pexels-photo-1680140.jpeg?auto=compress&cs=tinysrgb&w=800&dpr=2" alt="Color graded sunset landscape with vibrant colors" loading="lazy">
           </div>
-        </div>
-        <div class="detail-cards-col">
-          <div class="dcard"><div class="dcard-icon">🤖</div><div><div class="dcard-title">AI Retouching</div><div class="dcard-body">One-click skin smoothing, object removal, and background replacement. The AI detects faces, skin areas, and objects automatically — you just adjust the intensity slider to taste.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">🎨</div><div><div class="dcard-title">Color Grading</div><div class="dcard-body">HSL curves, RGB channels, color wheels for shadows/mids/highlights, and a library of 200+ professional LUTs. Apply a cinematic film look in one click, then fine-tune to perfection.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">⚡</div><div><div class="dcard-title">Batch Processing</div><div class="dcard-body">Select 500 photos and apply the same preset in seconds. Batch rename, resize, watermark, and export — essential for wedding photographers, e-commerce shoots, and content creators.</div></div></div>
+          <div class="ba-before" id="baBefore">
+            <img src="https://images.pexels.com/photos/1680140/pexels-photo-1680140.jpeg?auto=compress&cs=tinysrgb&w=800&dpr=2" alt="Original flat sunset landscape before color grading" style="filter:saturate(0.15) brightness(0.9)" loading="lazy">
+          </div>
+          <div class="ba-tag before">Before</div>
+          <div class="ba-tag after">After</div>
+          <div class="ba-divider" id="baDivider"></div>
+          <div class="ba-handle" id="baHandle">⇔</div>
         </div>
       </div>
-    </div>
-    <div class="ftab-content" id="photo-retouch">
-      <div class="detail-hero reveal">
-        <div class="detail-hero-text">
-          <div class="detail-tag">AI Retouching Suite</div>
-          <h3>Retouch like a pro,<br><em class="gc">in seconds</em></h3>
-          <p>Professional retouching used to take hours. Zenframe's AI understands skin, eyes, hair, and objects — so it knows what to smooth, sharpen, or remove without destroying the natural look of your subject.</p>
-          <div class="detail-explainer">
-            <div class="explainer-item">
-              <div class="explainer-label">What is frequency separation?</div>
-              <div class="explainer-body">Your photo has two layers of information: texture (pores, hair, fabric grain) and color (skin tone, shadows, highlights). Frequency separation splits these so you can fix blotchy skin tone without erasing natural texture — the result looks real, not airbrushed.</div>
-            </div>
-            <div class="explainer-item">
-              <div class="explainer-label">What is dodge & burn?</div>
-              <div class="explainer-body">Dodging lightens areas to add dimension; burning darkens to add depth. Pro retouchers use it to sculpt cheekbones, define jawlines, and remove distracting shadows. Zenframe lets you paint these adjustments with a pressure-sensitive brush.</div>
-            </div>
-          </div>
-        </div>
-        <div class="detail-cards-col">
-          <div class="dcard"><div class="dcard-icon">✨</div><div><div class="dcard-title">AI Skin Enhancement</div><div class="dcard-body">Detects skin automatically across any skin tone. Smooths texture naturally while preserving pores, freckles, and details you want to keep. Intensity slider goes from subtle to full commercial retouch.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">🎯</div><div><div class="dcard-title">Smart Object Removal</div><div class="dcard-body">Circle any object — a telephone wire, a tourist, a lens flare. The AI fills the gap using surrounding pixels with context-aware reconstruction. Works on complex backgrounds like foliage or brick.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">👁️</div><div><div class="dcard-title">Eye & Lip Enhancement</div><div class="dcard-body">Auto-detect eyes and lips. Brighten irises, sharpen eyelashes, add natural catchlights, and enhance lip colour — all with sliders, no manual masking required.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">⚙️</div><div><div class="dcard-title">Frequency Separation</div><div class="dcard-body">Split your image into texture and colour layers automatically. Paint corrections on each layer independently for results that hold up at 100% zoom — the standard for commercial retouching.</div></div></div>
-        </div>
-      </div>
-    </div>
-    <div class="ftab-content" id="photo-color">
-      <div class="detail-hero reveal">
-        <div class="detail-hero-text">
-          <div class="detail-tag">Color Grading</div>
-          <h3>Turn flat photos into<br><em class="gc">cinematic art</em></h3>
-          <p>Color grading is the difference between a snapshot and a photograph. It's how you set the mood, fix exposure problems, and make every image feel like it belongs to a consistent visual story.</p>
-          <div class="detail-explainer">
-            <div class="explainer-item">
-              <div class="explainer-label">What are curves?</div>
-              <div class="explainer-body">A curve is a graph with input brightness on the X axis and output brightness on the Y axis. Pull the middle up to brighten midtones. Drag the top-right down to recover blown highlights. Pull the bottom-left up to add a lifted shadow look (the "faded film" effect). RGB curves let you adjust each colour channel independently for precise colour casts.</div>
-            </div>
-            <div class="explainer-item">
-              <div class="explainer-label">What is a LUT?</div>
-              <div class="explainer-body">A LUT (Look Up Table) is a colour formula — it maps every input colour to a specific output colour. Professional colourists sell LUTs as "film emulation packs" or "cinematic looks". Drop a LUT onto your photo and it instantly shifts the colour palette to match a specific mood or film stock — then you fine-tune from there.</div>
-            </div>
-            <div class="explainer-item">
-              <div class="explainer-label">What is tone mapping?</div>
-              <div class="explainer-body">Real scenes have a huge range of brightness — from deep shadow to blazing sun. Camera sensors can't capture it all. Tone mapping is the process of compressing that range into what a screen can display, while preserving detail in both shadows and highlights. Essential for landscape and architectural photography.</div>
-            </div>
-          </div>
-        </div>
-        <div class="detail-cards-col">
-          <div class="dcard"><div class="dcard-icon">🔄</div><div><div class="dcard-title">Advanced Curves</div><div class="dcard-body">Master RGB curves, individual channel curves, and hue-vs-saturation curves. The point curve panel shows your image's histogram underneath so you can see exactly which tones you're adjusting.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">🎞️</div><div><div class="dcard-title">LUT Library</div><div class="dcard-body">200+ built-in LUTs across categories: film emulation (Kodak, Fuji, Ilford), cinematic (teal-orange, matte, bleach bypass), seasonal (golden hour, moody winter), and portrait-focused skin tone packs. Import your own .cube files.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">☀️</div><div><div class="dcard-title">Tone Mapping & HDR</div><div class="dcard-body">Blend multiple exposures into a single HDR image, then tone-map the result to look natural. Highlight recovery pulls back blown-out skies; shadow lift reveals detail in underexposed areas — non-destructively.</div></div></div>
+      <div class="feat-text">
+        <h3>Color Grading<br><em style="background:linear-gradient(120deg,var(--cyan),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-style:normal">That Transforms</em></h3>
+        <p>Drag the slider to see the difference. Our cinema-grade color tools turn flat, dull footage into vivid, emotionally-charged visuals — in seconds.</p>
+        <div class="feat-tags">
+          <span class="feat-tag">HSL Curves</span>
+          <span class="feat-tag">LUT Library</span>
+          <span class="feat-tag">Skin Tone Protection</span>
+          <span class="feat-tag">One-click Presets</span>
         </div>
       </div>
     </div>
 
-    <!-- Photo Before/After + Showcase -->
-    <div style="margin-top:2.5rem">
-      <div class="feat-photo-row reveal">
-        <div>
-          <div class="before-after" id="baSlider">
-            <div class="ba-after">
-              <img src="https://images.pexels.com/photos/1680140/pexels-photo-1680140.jpeg?auto=compress&cs=tinysrgb&w=800&dpr=2" alt="Color graded sunset landscape with vibrant colors" loading="lazy">
-            </div>
-            <div class="ba-before" id="baBefore">
-              <img src="https://images.pexels.com/photos/1680140/pexels-photo-1680140.jpeg?auto=compress&cs=tinysrgb&w=800&dpr=2" alt="Original flat sunset landscape before color grading" style="filter:saturate(0.15) brightness(0.9)" loading="lazy">
-            </div>
-            <div class="ba-tag before">Before</div>
-            <div class="ba-tag after">After</div>
-            <div class="ba-divider" id="baDivider"></div>
-            <div class="ba-handle" id="baHandle">⇔</div>
-          </div>
-        </div>
-        <div class="feat-text">
-          <h3>Color Grading<br><em style="background:linear-gradient(120deg,var(--cyan),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-style:normal">That Transforms</em></h3>
-          <p>Drag the slider to see the difference. Our cinema-grade color tools turn flat, dull footage into vivid, emotionally-charged visuals — in seconds.</p>
-          <div class="feat-tags">
-            <span class="feat-tag">HSL Curves</span>
-            <span class="feat-tag">LUT Library</span>
-            <span class="feat-tag">Skin Tone Protection</span>
-            <span class="feat-tag">One-click Presets</span>
-          </div>
-        </div>
+    <div class="photo-showcase hero-split reveal" style="margin-top:1.5rem">
+      <div class="showcase-img wide">
+        <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=800&dpr=2" alt="Professional portrait retouching with natural skin enhancement" loading="lazy">
+        <div class="img-label"><span>AI Retouch</span> Portrait enhancement</div>
       </div>
-
-      <div class="photo-showcase hero-split reveal" style="margin-top:1.5rem">
-        <div class="showcase-img wide">
-          <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=800&dpr=2" alt="Professional portrait retouching with natural skin enhancement" loading="lazy">
-          <div class="img-label"><span>AI Retouch</span> Portrait enhancement</div>
-        </div>
-        <div class="showcase-img square">
-          <img src="https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Product photography with batch editing workflow" loading="lazy">
-          <div class="img-label"><span>Batch</span> Product photography</div>
-        </div>
+      <div class="showcase-img square">
+        <img src="https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Product photography with batch editing workflow" loading="lazy">
+        <div class="img-label"><span>Batch</span> Product photography</div>
       </div>
     </div>
   </div>
@@ -1482,123 +1303,8 @@
       <h2><span class="grad-text">Video</span> Editing</h2>
       <p>Create professional cinematic videos that stand out</p>
     </div>
-    <div class="feature-tabs" id="video-tabs">
-      <button class="ftab active" data-tab="video" data-target="overview">Overview</button>
-      <button class="ftab" data-tab="video" data-target="timeline">Timeline</button>
-      <button class="ftab" data-tab="video" data-target="effects">Effects</button>
-      <button class="ftab" data-tab="video" data-target="export">Export</button>
-    </div>
-    <div class="ftab-content active" id="video-overview">
-      <div class="detail-hero reveal">
-        <div class="detail-hero-text">
-          <div class="detail-tag">Video Editing Engine</div>
-          <h3>Tell your story with<br><em class="gc">cinematic precision</em></h3>
-          <p>From raw footage to finished film — Zenframe's video engine handles 4K, 8K, multi-cam, and beyond. Real-time playback, intelligent clip tools, and cinema-grade color in one unified workspace.</p>
-          <div class="detail-steps">
-            <div class="dstep"><div class="dstep-num">01</div><div><strong>Import</strong> — Drag in MP4, MOV, ProRes, RAW. Zenframe auto-organises by date, camera, and reel.</div></div>
-            <div class="dstep"><div class="dstep-num">02</div><div><strong>Assemble</strong> — Build your rough cut on the multi-track timeline with magnetic snapping and ripple edits.</div></div>
-            <div class="dstep"><div class="dstep-num">03</div><div><strong>Polish</strong> — Add transitions, titles, VFX, and color grade each shot to match the mood.</div></div>
-            <div class="dstep"><div class="dstep-num">04</div><div><strong>Export</strong> — Output to any format and resolution with platform-optimised presets.</div></div>
-          </div>
-        </div>
-        <div class="detail-cards-col">
-          <div class="dcard"><div class="dcard-icon">🎬</div><div><div class="dcard-title">4K / 8K Timeline</div><div class="dcard-body">Edit at full resolution with hardware-accelerated playback. No proxy files needed — Zenframe streams directly from your storage with zero dropped frames.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">✨</div><div><div class="dcard-title">200+ Effects & Transitions</div><div class="dcard-body">Dissolves, motion wipes, 3D spins, glitch effects, and cinematic LUTs — all drag-and-drop onto your timeline. Customise duration, easing, and direction for each one.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">🎨</div><div><div class="dcard-title">Cinema-Grade Color</div><div class="dcard-body">Color wheels, curves, scopes, and LUT support built directly into the timeline. Match shots, apply grades, and see results in real time without switching to a separate app.</div></div></div>
-        </div>
-      </div>
-    </div>
-    <div class="ftab-content" id="video-timeline">
-      <div class="detail-hero reveal">
-        <div class="detail-hero-text">
-          <div class="detail-tag">The Timeline</div>
-          <h3>What is a <em class="gc">timeline</em> and<br>how does it work?</h3>
-          <p>The timeline is the heart of video editing — it's a horizontal map of your entire video laid out in time, left to right. Every clip, audio track, title, and effect sits on the timeline as a block you can move, trim, and layer.</p>
-          <div class="detail-explainer">
-            <div class="explainer-item">
-              <div class="explainer-label">What are tracks?</div>
-              <div class="explainer-body">Tracks are horizontal lanes stacked on top of each other. Video tracks sit above audio tracks. The top video track is what you see on screen — if a clip on Track 2 overlaps a clip on Track 1, Track 2 appears in front. This is how you layer text, graphics, and picture-in-picture.</div>
-            </div>
-            <div class="explainer-item">
-              <div class="explainer-label">What is a ripple edit?</div>
-              <div class="explainer-body">When you trim the end of a clip, a ripple edit automatically shifts every subsequent clip left to fill the gap — so you never get blank black frames in the middle of your video. It keeps everything in sync as you make cuts.</div>
-            </div>
-            <div class="explainer-item">
-              <div class="explainer-label">What is a keyframe?</div>
-              <div class="explainer-body">A keyframe is a point in time where you set a specific value — like opacity 0% at second 2, and opacity 100% at second 3. Zenframe automatically interpolates between keyframes to create smooth animations for position, scale, rotation, and any effect parameter.</div>
-            </div>
-            <div class="explainer-item">
-              <div class="explainer-label">What is magnetic snapping?</div>
-              <div class="explainer-body">When you drag a clip near another clip's edge, it "snaps" into place like a magnet — ensuring zero gaps and perfectly aligned cuts without manually zooming in to check. You can toggle snapping on/off with the S key.</div>
-            </div>
-          </div>
-        </div>
-        <div class="detail-cards-col">
-          <div class="dcard"><div class="dcard-icon">📋</div><div><div class="dcard-title">Multi-Track Timeline</div><div class="dcard-body">Unlimited video and audio tracks with magnetic snapping, ripple edits, and slip/slide trimming. Colour-code tracks by camera, speaker, or scene for complex projects.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">🗂️</div><div><div class="dcard-title">Clip Management</div><div class="dcard-body">Tag, label, rate, and search clips in the media bin. Group clips into reels, use smart collections, and link multi-cam angles so you can cut between cameras with a single click.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">🔑</div><div><div class="dcard-title">Keyframe Animation</div><div class="dcard-body">Click the stopwatch icon on any parameter to enable keyframing. Draw bezier curves in the keyframe editor for organic easing — not just linear moves. Animate position, scale, opacity, blur, colour, and custom effect values.</div></div></div>
-        </div>
-      </div>
-    </div>
-    <div class="ftab-content" id="video-effects">
-      <div class="detail-hero reveal">
-        <div class="detail-hero-text">
-          <div class="detail-tag">Effects & Transitions</div>
-          <h3>Make every cut<br><em class="gc">feel intentional</em></h3>
-          <p>Transitions and effects aren't just decorations — they control how your audience feels as they move through your story. A hard cut creates energy; a slow dissolve creates calm. Zenframe gives you 200+ tools to match every mood.</p>
-          <div class="detail-explainer">
-            <div class="explainer-item">
-              <div class="explainer-label">What is a transition?</div>
-              <div class="explainer-body">A transition is an animation between two clips. The most common is a straight cut (no animation). Others include: dissolve (clip A fades out while clip B fades in), wipe (B slides over A), zoom (smash cut with scale), and dip-to-black (fade to black then up again). Each tells a slightly different story.</div>
-            </div>
-            <div class="explainer-item">
-              <div class="explainer-label">What is motion blur?</div>
-              <div class="explainer-body">When a fast object moves, your eye sees a blur trail — think a spinning logo or fast camera pan. Zenframe can add synthetic motion blur to any clip or animation to make movement look natural and cinematic, even if the original footage was shot without it.</div>
-            </div>
-            <div class="explainer-item">
-              <div class="explainer-label">What are lower thirds?</div>
-              <div class="explainer-body">Lower thirds are text graphics that appear in the bottom portion of the screen — used to display a person's name and title in interviews, location captions, or subtitles. Zenframe has 40+ animated lower third templates you can customise with your own brand fonts and colours.</div>
-            </div>
-          </div>
-        </div>
-        <div class="detail-cards-col">
-          <div class="dcard"><div class="dcard-icon">🔀</div><div><div class="dcard-title">Transition Library</div><div class="dcard-body">200+ transitions including film dissolves, motion wipes, zoom cuts, 3D rotations, glitch effects, and light leaks. Drag onto any cut point, set duration and easing, done.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">💫</div><div><div class="dcard-title">Visual Effects (VFX)</div><div class="dcard-body">Particle systems, lens flares, light rays, chromatic aberration, film grain, and motion blur — add mood and texture to any shot. All GPU-accelerated so they play back in real time.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">📝</div><div><div class="dcard-title">Titles & Motion Graphics</div><div class="dcard-body">40+ animated title templates including lower thirds, full-screen openers, kinetic text, and subtitle tracks. Fully editable — change font, colour, size, timing, and animation curve without leaving the timeline.</div></div></div>
-        </div>
-      </div>
-    </div>
-    <div class="ftab-content" id="video-export">
-      <div class="detail-hero reveal">
-        <div class="detail-hero-text">
-          <div class="detail-tag">Export & Delivery</div>
-          <h3>Get your video<br><em class="gc">out to the world</em></h3>
-          <p>The export stage is where your project becomes a shareable file. The right settings determine file size, image quality, and whether your video looks great on every screen — from a phone to a cinema projector.</p>
-          <div class="detail-explainer">
-            <div class="explainer-item">
-              <div class="explainer-label">What is a codec? (H.264, ProRes…)</div>
-              <div class="explainer-body">A codec is an algorithm that compresses your video into a smaller file. H.264 is the internet standard — small files, great compatibility. H.265 (HEVC) halves the size again. ProRes is used in professional post-production — much larger files but lossless quality for editing handoffs. Choose H.264 for YouTube; ProRes for delivering to a client.</div>
-            </div>
-            <div class="explainer-item">
-              <div class="explainer-label">What does bitrate mean?</div>
-              <div class="explainer-body">Bitrate is how much data is used per second of video, measured in Mbps. Higher bitrate = sharper image but larger file. YouTube recommends 8 Mbps for 1080p, 35–45 Mbps for 4K. Zenframe's platform presets set this automatically — or you can dial it in manually.</div>
-            </div>
-            <div class="explainer-item">
-              <div class="explainer-label">What is colour space / profile?</div>
-              <div class="explainer-body">Colour profiles (sRGB, Rec.709, DCI-P3) define the range of colours encoded in the file. Rec.709 is standard for web and broadcast. DCI-P3 is cinema. If you shoot in LOG or RAW, Zenframe converts to the correct output colour space automatically so colours look right everywhere.</div>
-            </div>
-          </div>
-        </div>
-        <div class="detail-cards-col">
-          <div class="dcard"><div class="dcard-icon">📦</div><div><div class="dcard-title">Multiple Formats</div><div class="dcard-body">Export to H.264, H.265, ProRes 422/4444, DNxHD, VP9, and AV1. Import any format — Zenframe handles transcoding automatically in the background.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">📐</div><div><div class="dcard-title">Platform Presets</div><div class="dcard-body">One-click presets for YouTube (1080p, 4K), Instagram Reels (9:16), TikTok, Twitter, LinkedIn, and cinema (DCP). Each preset sets the correct resolution, bitrate, frame rate, and colour space automatically.</div></div></div>
-          <div class="dcard"><div class="dcard-icon">⚙️</div><div><div class="dcard-title">Batch Export</div><div class="dcard-body">Queue up 10 different exports — same project, different formats, resolutions, or in-out points — and Zenframe renders them all overnight. Wake up to a folder of finished files ready to deliver.</div></div></div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Video Photo Showcase -->
-    <div class="feat-photo-row flip reveal" style="margin-top:2.5rem">
+    <div class="feat-photo-row flip reveal">
       <div class="showcase-img wide" style="aspect-ratio:16/9">
         <img src="https://images.pexels.com/photos/2873486/pexels-photo-2873486.jpeg?auto=compress&cs=tinysrgb&w=800&dpr=2" alt="Cinematic video editing workspace with multi-track timeline" loading="lazy">
         <div class="img-label"><span>4K Timeline</span> Multi-track cinematic editing</div>
@@ -1614,6 +1320,7 @@
         </div>
       </div>
     </div>
+    
     <div class="photo-showcase triple reveal" style="margin-top:1.5rem">
       <div class="showcase-img short">
         <img src="https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Music video production with color grading" loading="lazy">
@@ -1624,7 +1331,7 @@
         <div class="img-label"><span>Color</span> Cinema grade LUTs</div>
       </div>
       <div class="showcase-img short">
-        <img src="https://images.pexels.com/photos/3945687/pexels-photo-3945687.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Animated motion graphics and titles" loading="lazy">
+        <img src="https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Animated motion graphics and titles" loading="lazy">
         <div class="img-label"><span>Motion</span> Animated titles</div>
       </div>
     </div>
@@ -1676,7 +1383,7 @@
           <li>2GB storage</li>
           <li>Limited exports</li>
         </ul>
-        <button class="price-btn ghost" data-scroll-to="payment">Get Started</button>
+        <button class="price-btn ghost" data-plan="free">Get Started</button>
       </div>
       <div class="price-card featured">
         <div class="price-badge">Most popular</div>
@@ -1689,7 +1396,7 @@
           <li>All AI tools</li>
           <li>Priority support</li>
         </ul>
-        <button class="price-btn primary" data-scroll-to="payment">Start Free Trial</button>
+        <button class="price-btn primary" data-plan="pro">Start Free Trial</button>
       </div>
       <div class="price-card">
         <div class="price-tier">Studio</div>
@@ -1701,7 +1408,7 @@
           <li>Team collaboration</li>
           <li>Dedicated support</li>
         </ul>
-        <button class="price-btn ghost" data-scroll-to="payment">Contact Sales</button>
+        <button class="price-btn ghost" data-plan="studio">Contact Sales</button>
       </div>
     </div>
   </div>
@@ -1719,8 +1426,11 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Zenframe</div>
-  <p>© 2024 Demo Project by Abhishek NC. Built to showcase modern web design techniques.</p>
+  <div class="footer-brand">
+    <img src="https://messages-prod.27c852f3500f38c1e7786e2c9ff9e48f.r2.cloudflarestorage.com/019d9f6d-33c2-72f7-ab98-354d00929c8f/1778952601953-019e31d6-2d74-7738-a679-ac8a09d77044.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=b33de61d4f22a31b59b25364ab5037c5%2F20260516%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260516T173002Z&X-Amz-Expires=3600&X-Amz-Signature=e7a447c15ceb616ece10ab1485677f8749f82f10a632d1f2e8d2cb281fa60545&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject" alt="Brand Logo" class="footer-image">
+    <div class="footer-logo">Zenframe</div>
+  </div>
+  <p>© 2024 Zenframe. Empowering creators worldwide with professional-grade tools.</p>
 </footer>
 
 <script>
@@ -1769,13 +1479,13 @@ setInterval(()=>goQ((qi+1)%quotes.length),5000);
 // ─── SCROLL NAV ───
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
 
-// ─── SMOOTH SCROLL WITH EVENT DELEGATION ───
+// ─── SMOOTH SCROLL ───
 function goTo(id){
   const el=document.getElementById(id);
   if(el) {
     el.scrollIntoView({behavior:'smooth'});
-    // Close mobile menu if open
     document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('mobileMenuBtn').textContent = '☰';
   }
 }
 
@@ -1796,7 +1506,6 @@ mobileMenuBtn?.addEventListener('click', () => {
   mobileMenuBtn.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
 });
 
-// Close menu when clicking outside
 document.addEventListener('click', e => {
   if(!e.target.closest('nav') && navLinks.classList.contains('open')) {
     navLinks.classList.remove('open');
@@ -1804,48 +1513,91 @@ document.addEventListener('click', e => {
   }
 });
 
-// ─── ESC KEY LISTENERS ───
+// ─── ESC KEY ───
 window.addEventListener('keydown', e => {
   if(e.key === 'Escape') {
-    // Close mobile menu
     if(navLinks.classList.contains('open')) {
       navLinks.classList.remove('open');
       mobileMenuBtn.textContent = '☰';
     }
+    const modal = document.getElementById('freePlanModal');
+    if(modal.classList.contains('show')) {
+      modal.classList.remove('show');
+    }
   }
 });
 
-// ─── FEATURE TABS WITH EVENT DELEGATION ───
-document.querySelectorAll('.feature-tabs').forEach(tabContainer => {
-  tabContainer.addEventListener('click', e => {
-    const btn = e.target.closest('.ftab');
-    if(!btn) return;
+// ─── FREE PLAN ERROR FLOW ───
+function showFreePlanError() {
+  const modal = document.getElementById('freePlanModal');
+  const content = document.getElementById('freeModalContent');
+  
+  content.innerHTML = `
+    <div class="free-modal-spinner">
+      <svg width="64" height="64" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="28" fill="none" stroke="rgba(0,229,255,0.15)" stroke-width="4"/>
+        <circle cx="32" cy="32" r="28" fill="none" stroke="var(--cyan)" stroke-width="4" 
+                stroke-dasharray="44 132" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="free-modal-title">Redirecting to Your Dashboard...</div>
+    <div class="free-modal-text">Please wait while we set up your free account</div>
+    <div class="free-modal-timer" id="freeTimer">10</div>
+  `;
+  
+  modal.classList.add('show');
+  
+  let countdown = 10;
+  const timerEl = document.getElementById('freeTimer');
+  
+  const interval = setInterval(() => {
+    countdown--;
+    if(timerEl) timerEl.textContent = countdown;
     
-    const section = btn.dataset.tab;
-    const target = btn.dataset.target;
-    
-    // Update tab buttons
-    tabContainer.querySelectorAll('.ftab').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    
-    // Update content
-    document.querySelectorAll(`[id^=${section}-]`).forEach(el => {
-      if(el.classList.contains('ftab-content')) el.classList.remove('active');
-    });
-    
-    const content = document.getElementById(`${section}-${target}`);
-    if(content) {
-      content.classList.add('active');
-      
-      // Re-observe new reveals
+    if(countdown === 0) {
+      clearInterval(interval);
       setTimeout(() => {
-        content.querySelectorAll('.reveal').forEach(el => {
-          observer.observe(el);
-          el.classList.add('on');
-        });
-      }, 50);
+        content.innerHTML = `
+          <div class="wifi-icon">📡</div>
+          <div class="free-modal-error-title">OOPS! SERVER PROBLEM</div>
+          <div class="free-modal-text" style="color:#f87171;font-weight:600;">
+            Unable to connect to server
+          </div>
+          <div class="free-modal-text">
+            Please check your internet connection and try again
+          </div>
+          <button class="free-modal-btn" onclick="closeFreeModal()">
+            Try Again
+          </button>
+          <p style="margin-top:1rem;font-size:0.8rem;color:var(--muted);">
+            Error Code: ERR_CONNECTION_TIMEOUT
+          </p>
+        `;
+      }, 500);
     }
-  });
+  }, 1000);
+}
+
+function closeFreeModal() {
+  document.getElementById('freePlanModal').classList.remove('show');
+}
+
+// ─── PLAN SELECTION ───
+document.addEventListener('click', e => {
+  const btn = e.target.closest('[data-plan]');
+  if(!btn) return;
+  
+  const plan = btn.dataset.plan;
+  
+  if(plan === 'free') {
+    showFreePlanError();
+  } else {
+    goTo('payment');
+  }
+});
+
+document.getElementById('freePlanModal')?.addEventListener('click', function(e) {
+  if(e.target === this) closeFreeModal();
 });
 
 // ─── GALLERY ───
@@ -1854,11 +1606,11 @@ const galleryData=[
   {title:'Portrait Retouching',sub:'AI-enhanced beauty work',cat:'photo',img:'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2',wide:true,tall:true,featured:true},
   {title:'Music Video Edit',sub:'4K cinematic editing',cat:'video',img:'https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
   {title:'Podcast Production',sub:'Professional audio mix',cat:'audio',img:'https://images.pexels.com/photos/3587478/pexels-photo-3587478.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
-  {title:'Motion Design',sub:'3D animated titles',cat:'motion',img:'https://images.pexels.com/photos/3808519/pexels-photo-3808519.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2',wide:true,featured:true},
+  {title:'Motion Design',sub:'3D animated titles',cat:'motion',img:'https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2',wide:true,featured:true},
   {title:'Wedding Highlight',sub:'4K slow-mo sequences',cat:'video',img:'https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
   {title:'Product Photography',sub:'E-commerce editing',cat:'photo',img:'https://images.pexels.com/photos/3962286/pexels-photo-3962286.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
   {title:'Sound Design',sub:'Atmospheric audio layers',cat:'audio',img:'https://images.pexels.com/photos/3407617/pexels-photo-3407617.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
-  {title:'Brand Animation',sub:'Logo motion graphics',cat:'motion',img:'https://images.pexels.com/photos/3945687/pexels-photo-3945687.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
+  {title:'Brand Animation',sub:'Logo motion graphics',cat:'motion',img:'https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
   {title:'Landscape Photography',sub:'Nature color grading',cat:'photo',img:'https://images.pexels.com/photos/1624496/pexels-photo-1624496.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
 ];
 
@@ -1886,7 +1638,6 @@ function renderGallery(filter){
   }, 200);
 }
 
-// Gallery filter with event delegation
 document.querySelector('.filter-bar')?.addEventListener('click', e => {
   const btn = e.target.closest('.fbtn');
   if(!btn) return;
