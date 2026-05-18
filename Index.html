@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zenframe — Demo Landing Page | Abhishek NC</title>
+  <meta name="description" content="A portfolio demonstration of an all-in-one editing software landing page by Abhishek NC">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎬</text></svg>">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --cyan: #00e5ff;
+      --violet: #7c3aed;
+      --pink: #f43f8e;
+      --bg: #050508;
+      --surface: #0d0d14;
+      --surface2: #13131e;
+      --border: rgba(255,255,255,0.07);
+      --text: #f0f0f8;
+      --muted: #9a9abb;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+      /* BACKGROUND PATTERN */
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(0, 229, 255, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(124, 58, 237, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(244, 63, 142, 0.1) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(0, 229, 255, 0.05) 0px, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ─── BLOBS ─── */
+    .blobs {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.18;
+    }
+    .blob-1 { width: 600px; height: 600px; background: var(--cyan); top: -10%; left: -10%; animation: drift1 18s ease-in-out infinite; }
+    .blob-2 { width: 700px; height: 700px; background: var(--violet); bottom: -15%; right: -10%; animation: drift2 22s ease-in-out infinite; }
+    .blob-3 { width: 400px; height: 400px; background: var(--pink); top: 40%; right: 5%; animation: drift3 15s ease-in-out infinite; }
+
+    @keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(60px,-80px)} }
+    @keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-70px,60px)} }
+    @keyframes drift3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,50px)} }
+
+    /* ─── FOCUS STATES ─── */
+    button:focus-visible, a:focus-visible, input:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 1.25rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(5,5,8,0.6);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    nav.scrolled { background: rgba(5,5,8,0.92); }
+
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+    }
+
+    .nav-logo-image {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.4s ease;
+    }
+
+    nav.scrolled .nav-logo-image {
+      opacity: 1;
+      transform: scale(1);
+      border-color: var(--cyan);
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      background: linear-gradient(120deg, var(--cyan), var(--violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2.5rem;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .mobile-menu-btn {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 1.5rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .mobile-menu-btn:hover { border-color: rgba(255,255,255,0.2); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      border: none;
+      color: #fff;
+      padding: 0.7rem 1.8rem;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+      box-shadow: 0 0 30px rgba(0,229,255,0.15);
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 140px 5% 80px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,229,255,0.08);
+      border: 1px solid rgba(0,229,255,0.2);
+      border-radius: 100px;
+      padding: 0.4rem 1.1rem;
+      font-size: 0.78rem;
+      color: var(--cyan);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.7s ease both;
+    }
+    .hero-eyebrow span { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); display: inline-block; animation: blink 1.5s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 8vw, 6.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.7s ease 0.1s both;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(120deg, var(--cyan) 0%, var(--violet) 50%, var(--pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 580px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.7s ease 0.2s both;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.7s ease 0.3s both;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.7rem 1.8rem;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+
+    .hero-media {
+      margin-top: 5rem;
+      width: 100%;
+      max-width: 1000px;
+      animation: fadeUp 0.9s ease 0.4s both;
+      position: relative;
+    }
+    .hero-caption {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+    }
+    .hero-media img {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      display: block;
+    }
+    .hero-media::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      box-shadow: inset 0 0 80px rgba(0,229,255,0.05), 0 40px 120px rgba(0,0,0,0.6);
+      pointer-events: none;
+    }
+    .mock-screen {
+      background: var(--surface);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .mock-bar {
+      background: var(--surface2);
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mock-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .mock-bar-title {
+      flex: 1;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .mock-body {
+      display: grid;
+      grid-template-columns: 220px 1fr 200px;
+      min-height: 340px;
+    }
+    .mock-panel {
+      padding: 1rem;
+      border-right: 1px solid var(--border);
+    }
+    .mock-panel:last-child { border-right: none; border-left: 1px solid var(--border); }
+    .mock-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    .mock-track {
+      background: var(--surface2);
+      border-radius: 4px;
+      height: 32px;
+      margin-bottom: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+    .mock-track-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      background: linear-gradient(90deg, rgba(0,229,255,0.3), rgba(124,58,237,0.3));
+      border-radius: 4px;
+    }
+    .mock-waveform {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      height: 60px;
+      padding: 0 4px;
+    }
+    .mock-bar-wave {
+      flex: 1;
+      border-radius: 2px;
+      background: linear-gradient(180deg, var(--cyan), var(--violet));
+      opacity: 0.6;
+    }
+    .mock-thumb {
+      width: 2px;
+      background: var(--cyan);
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 30%;
+      box-shadow: 0 0 8px var(--cyan);
+    }
+    .mock-preview {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+      display: block;
+    }
+    .mock-color-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 1rem;
+    }
+    .mock-color-wheel {
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, #ff006e, #7b00ff, #00d4ff, #00ff88, #ffdd00, #ff006e);
+      opacity: 0.7;
+      border: 2px solid var(--border);
+    }
+    .mock-slider {
+      height: 4px;
+      background: linear-gradient(90deg, #000, #fff);
+      border-radius: 2px;
+      margin-bottom: 8px;
+      position: relative;
+    }
+    .mock-slider-thumb {
+      position: absolute;
+      left: 60%;
+      top: -4px;
+      width: 10px;
+      height: 12px;
+      background: var(--cyan);
+      border-radius: 2px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── QUOTE STRIP ─── */
+    .quote-strip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 5%;
+      text-align: center;
+      position: relative;
+    }
+    .quote-strip blockquote {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      font-weight: 600;
+      color: var(--text);
+      max-width: 800px;
+      margin: 0 auto 0.75rem;
+      letter-spacing: -0.02em;
+      transition: opacity 0.4s, transform 0.4s;
+    }
+    .quote-strip blockquote.fade-out { opacity: 0; transform: translateY(-8px); }
+    .quote-strip cite {
+      color: var(--muted);
+      font-style: normal;
+      font-size: 0.9rem;
+      transition: opacity 0.4s;
+    }
+    .quote-strip cite.fade-out { opacity: 0; }
+    .quote-dots { display: flex; justify-content: center; gap: 8px; margin-top: 1.5rem; }
+    .qdot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .qdot.active { background: var(--cyan); transform: scale(1.4); }
+
+    /* ─── SECTION BASE ─── */
+    .section {
+      padding: 100px 5%;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 3.5rem;
+    }
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.75rem;
+    }
+    .section-header p { color: var(--muted); font-size: 1rem; max-width: 500px; }
+
+    .grad-text {
+      background: linear-gradient(120deg, var(--cyan), var(--violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* ─── FEATURE TABS ─── */
+    .feature-section { padding: 80px 5%; border-top: 1px solid var(--border); }
+    .feature-section-inner { max-width: 1280px; margin: 0 auto; }
+
+    .feature-tabs {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 2.5rem;
+      background: var(--surface);
+    }
+    .ftab {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-right: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .ftab:last-child { border-right: none; }
+    .ftab:hover { color: var(--text); background: var(--surface2); }
+    .ftab.active { background: linear-gradient(135deg, rgba(0,229,255,0.12), rgba(124,58,237,0.12)); color: var(--cyan); border-bottom: 2px solid var(--cyan); }
+
+    .ftab-content { display: none; }
+    .ftab-content.active { display: block; animation: fadeUp 0.4s ease both; }
+    .cards-layout { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+    .ftab-content.active .detail-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+
+    /* ─── CARDS ─── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .card:hover {
+      border-color: rgba(0,229,255,0.2);
+      transform: translateY(-4px);
+    }
+    .card-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(0,229,255,0.15), rgba(124,58,237,0.15));
+      border: 1px solid rgba(0,229,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: 1.25rem;
+    }
+    .card h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .card p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+
+    /* ─── GALLERY ─── */
+    #gallery { padding: 100px 5%; border-top: 1px solid var(--border); }
+    .gallery-inner { max-width: 1280px; margin: 0 auto; }
+
+    .filter-bar {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .fbtn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.5rem 1.2rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--font-body);
+    }
+    .fbtn:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
+    .fbtn.active { background: rgba(0,229,255,0.1); border-color: rgba(0,229,255,0.3); color: var(--cyan); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 220px;
+      gap: 1rem;
+      transition: opacity 0.3s ease;
+    }
+    .g-item {
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    .g-item.wide { grid-column: span 2; }
+    .g-item.tall { grid-row: span 2; }
+    .g-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      display: block;
+    }
+    .g-item:hover img { transform: scale(1.06); }
+    .g-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.85) 100%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.25rem;
+    }
+    .g-item:hover .g-overlay { opacity: 1; }
+    .g-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+    .g-sub { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top: 2px; }
+    .g-badge {
+      position: absolute;
+      top: 10px; right: 10px;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    /* ─── STATS ─── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin: 0 5%;
+    }
+    .stat-cell {
+      background: var(--surface);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      background: linear-gradient(120deg, var(--cyan), var(--violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.25rem;
+    }
+    .stat-lbl { color: var(--muted); font-size: 0.875rem; }
+
+    /* ─── PRICING ─── */
+    #pricing { padding: 100px 5%; border-top: 1px solid var(--border); }
+    .pricing-inner { max-width: 1000px; margin: 0 auto; }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .price-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+      position: relative;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .price-card:hover { transform: translateY(-4px); }
+    .price-card.featured {
+      border: 1.5px solid rgba(0,229,255,0.4);
+      background: linear-gradient(135deg, rgba(0,229,255,0.04), rgba(124,58,237,0.04));
+    }
+    .price-badge {
+      position: absolute;
+      top: -12px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+    .price-tier {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .price-amount {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.25rem;
+    }
+    .price-amount sup { font-size: 1.2rem; vertical-align: super; }
+    .price-amount sub { font-size: 1rem; font-weight: 400; color: var(--muted); vertical-align: baseline; }
+    .price-desc { color: var(--muted); font-size: 0.875rem; margin-bottom: 1.5rem; }
+    .price-feats {
+      list-style: none;
+      border-top: 1px solid var(--border);
+      padding-top: 1.25rem;
+      margin-bottom: 1.75rem;
+    }
+    .price-feats li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.875rem;
+      color: var(--muted);
+      padding: 0.4rem 0;
+    }
+    .price-feats li::before { content: '✓'; color: var(--cyan); font-weight: 700; }
+    .price-btn {
+      width: 100%;
+      padding: 0.85rem;
+      border-radius: 10px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .price-btn.ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .price-btn.ghost:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+    .price-btn.primary {
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      border: none;
+      color: #fff;
+      box-shadow: 0 8px 30px rgba(0,229,255,0.2);
+    }
+    .price-btn.primary:hover { opacity: 0.9; transform: translateY(-2px); }
+
+    /* ─── DEMO PAYMENT NOTICE ─── */
+    #payment { padding: 60px 5%; }
+    .demo-notice {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px dashed rgba(244,63,142,0.3);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+    }
+    .demo-badge {
+      display: inline-block;
+      background: rgba(244,63,142,0.1);
+      border: 1px solid rgba(244,63,142,0.3);
+      color: var(--pink);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 12px;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+    .demo-notice h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .demo-notice p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+
+    /* ─── FREE PLAN ERROR MODAL ─── */
+    .free-plan-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+    }
+    .free-plan-modal.show { display: flex; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .free-modal-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      max-width: 480px;
+      width: 90%;
+      text-align: center;
+      animation: slideUp 0.4s ease;
+      position: relative;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .free-modal-spinner {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1.5rem;
+      position: relative;
+    }
+
+    .free-modal-spinner svg {
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .free-modal-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(120deg, var(--cyan), var(--violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .free-modal-text {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .free-modal-timer {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--cyan);
+      margin: 1rem 0;
+      letter-spacing: -0.04em;
+    }
+
+    .wifi-icon {
+      font-size: 4rem;
+      margin: 1.5rem 0;
+      opacity: 0.3;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.05); }
+    }
+
+    .free-modal-error-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+      color: #f87171;
+    }
+
+    .free-modal-btn {
+      margin-top: 1.5rem;
+      padding: 0.9rem 2rem;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .free-modal-btn:hover {
+      opacity: 0.88;
+      transform: translateY(-2px);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      background: linear-gradient(120deg, var(--cyan), var(--violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .footer-image {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      object-fit: cover;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .footer-image:hover {
+      transform: scale(1.05);
+      border-color: var(--cyan);
+    }
+    footer p { color: var(--muted); font-size: 0.85rem; }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.on { opacity: 1; transform: none; }
+
+    /* ─── PHOTO SHOWCASES ─── */
+    .photo-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .photo-showcase.triple { grid-template-columns: 1fr 1fr 1fr; }
+    .photo-showcase.hero-split { grid-template-columns: 1.4fr 1fr; gap: 1.5rem; }
+
+    .showcase-img {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .showcase-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .showcase-img:hover img { transform: scale(1.04); }
+    .showcase-img .img-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.25rem;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,0.85));
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .showcase-img .img-label span {
+      background: rgba(0,229,255,0.15);
+      border: 1px solid rgba(0,229,255,0.25);
+      color: var(--cyan);
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 100px;
+    }
+    .showcase-img.tall { aspect-ratio: 2/3; }
+    .showcase-img.wide { aspect-ratio: 16/9; }
+    .showcase-img.square { aspect-ratio: 1; }
+    .showcase-img.short { aspect-ratio: 3/2; }
+
+    /* before/after strip */
+    .before-after {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      aspect-ratio: 16/9;
+      cursor: col-resize;
+      touch-action: none;
+    }
+    .ba-after, .ba-before {
+      position: absolute;
+      inset: 0;
+    }
+    .ba-after img, .ba-before img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .ba-before {
+      clip-path: inset(0 50% 0 0);
+      transition: clip-path 0.05s;
+    }
+    .ba-divider {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: var(--cyan);
+      transform: translateX(-50%);
+      z-index: 3;
+      box-shadow: 0 0 12px var(--cyan);
+      transition: left 0.05s;
+    }
+    .ba-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--cyan);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem;
+      color: #000;
+      font-weight: 900;
+      box-shadow: 0 0 20px rgba(0,229,255,0.5);
+      z-index: 4;
+      cursor: col-resize;
+      transition: left 0.05s;
+    }
+    .ba-tag {
+      position: absolute;
+      top: 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .ba-tag.before { left: 12px; background: rgba(0,0,0,0.6); color: #aaa; border: 1px solid rgba(255,255,255,0.15); }
+    .ba-tag.after  { right: 12px; background: rgba(0,229,255,0.15); color: var(--cyan); border: 1px solid rgba(0,229,255,0.3); }
+
+    /* feature photo row */
+    .feat-photo-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      margin-top: 2.5rem;
+    }
+    .feat-photo-row.flip { direction: rtl; }
+    .feat-photo-row.flip > * { direction: ltr; }
+    .feat-photo-row img {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      display: block;
+    }
+    .feat-text h3 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.75rem;
+    }
+    .feat-text p { color: var(--muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+    .feat-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .feat-tag {
+      background: rgba(0,229,255,0.08);
+      border: 1px solid rgba(0,229,255,0.15);
+      color: var(--cyan);
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .mobile-menu-btn { display: block !important; }
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        width: 250px;
+        height: calc(100vh - 70px);
+        background: var(--surface);
+        border-left: 1px solid var(--border);
+        flex-direction: column;
+        padding: 2rem 1.5rem;
+        gap: 1.5rem;
+        transition: right 0.3s ease;
+        z-index: 99;
+      }
+      .nav-links.open { right: 0; }
+      .mock-body { grid-template-columns: 1fr; }
+      .mock-panel:not(:first-child) { display: none; }
+      .cards-layout { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2,1fr); }
+      .g-item.wide { grid-column: span 2; }
+      .stats-row { grid-template-columns: repeat(2,1fr); }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .photo-showcase { grid-template-columns: 1fr 1fr; }
+      .photo-showcase.triple { grid-template-columns: 1fr 1fr; }
+      .photo-showcase.hero-split { grid-template-columns: 1fr; }
+      .feat-photo-row { grid-template-columns: 1fr; }
+      .feat-photo-row.flip { direction: ltr; }
+      footer { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      .cards-layout { grid-template-columns: 1fr; }
+      .gallery-grid { 
+        grid-template-columns: 1fr; 
+        grid-auto-rows: 200px; 
+      }
+      .g-item.wide, .g-item.tall { 
+        grid-column: span 1; 
+        grid-row: span 1; 
+      }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .photo-showcase, .photo-showcase.triple { grid-template-columns: 1fr; }
+    }
+
+    /* ─── NOSCRIPT ─── */
+    noscript .noscript-warning {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem;
+      background: #ff5f57;
+      color: #fff;
+      text-align: center;
+      z-index: 10000;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<noscript>
+  <div class="noscript-warning">
+    ⚠️ JavaScript is required to view this site. Please enable it in your browser settings.
+  </div>
+</noscript>
+
+<div class="blobs">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<!-- FREE PLAN ERROR MODAL -->
+<div class="free-plan-modal" id="freePlanModal">
+  <div class="free-modal-box" id="freeModalContent">
+    <!-- Content will be injected by JavaScript -->
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="logo-wrapper" data-scroll-to="home">
+    <img src="https://messages-prod.27c852f3500f38c1e7786e2c9ff9e48f.r2.cloudflarestorage.com/019d9f6d-33c2-72f7-ab98-354d00929c8f/1778952601953-019e31d6-2d74-7738-a679-ac8a09d77044.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=b33de61d4f22a31b59b25364ab5037c5%2F20260516%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260516T173002Z&X-Amz-Expires=3600&X-Amz-Signature=e7a447c15ceb616ece10ab1485677f8749f82f10a632d1f2e8d2cb281fa60545&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject" alt="Zenframe Logo" class="nav-logo-image">
+    <div class="logo">Zenframe</div>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a data-scroll-to="audio-section">Audio</a></li>
+    <li><a data-scroll-to="photo-section">Photo</a></li>
+    <li><a data-scroll-to="video-section">Video</a></li>
+    <li><a data-scroll-to="gallery">Gallery</a></li>
+    <li><a data-scroll-to="pricing">Pricing</a></li>
+  </ul>
+  <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+  <button class="btn-primary" data-scroll-to="pricing">Start Free Trial — No Card Required →</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-eyebrow"><span></span>Portfolio Demo Project</div>
+  <h1>Professional Editing,<br><em>Simplified.</em></h1>
+  <p>All-in-one software for creators. Edit photos, videos, and audio with professional-grade tools — no learning curve. Pure creation.</p>
+  <div class="hero-ctas">
+    <button class="btn-primary" data-scroll-to="audio-section">Explore Features</button>
+    <button class="btn-ghost" data-scroll-to="gallery">See Showcase</button>
+  </div>
+
+  <!-- Fake app UI mockup -->
+  <div class="hero-media reveal">
+    <p class="hero-caption">↓ Interactive editing interface — Audio, Video & Photo in one workspace</p>
+    <div class="mock-screen">
+      <div class="mock-bar">
+        <div class="mock-dot" style="background:#ff5f57"></div>
+        <div class="mock-dot" style="background:#febc2e"></div>
+        <div class="mock-dot" style="background:#28c840"></div>
+        <div class="mock-bar-title">zenframe — sunset_edit_v3.zfp</div>
+      </div>
+      <div class="mock-body">
+        <div class="mock-panel">
+          <div class="mock-label">Tracks</div>
+          <div class="mock-track"><div class="mock-track-fill" style="width:75%; background:linear-gradient(90deg,rgba(0,229,255,0.4),rgba(0,229,255,0.1))"></div><div class="mock-thumb"></div></div>
+          <div class="mock-track"><div class="mock-track-fill" style="width:55%; background:linear-gradient(90deg,rgba(124,58,237,0.4),rgba(124,58,237,0.1))"></div></div>
+          <div class="mock-track"><div class="mock-track-fill" style="width:90%; background:linear-gradient(90deg,rgba(244,63,142,0.4),rgba(244,63,142,0.1))"></div></div>
+          <div class="mock-track"><div class="mock-track-fill" style="width:40%; background:linear-gradient(90deg,rgba(0,229,255,0.3),rgba(0,229,255,0.05))"></div></div>
+          <div style="margin-top:1rem">
+            <div class="mock-label">Waveform</div>
+            <div class="mock-waveform" id="waveform"></div>
+          </div>
+        </div>
+        <div class="mock-panel" style="flex:1; padding:0">
+          <img class="mock-preview" src="https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Zenframe color grading interface showing sunset landscape with color adjustment panels" loading="eager">
+        </div>
+        <div class="mock-panel">
+          <div class="mock-label">Color Wheels</div>
+          <div class="mock-color-grid">
+            <div class="mock-color-wheel"></div>
+            <div class="mock-color-wheel" style="background:conic-gradient(from 0deg,#7b00ff,#00d4ff,#00ff88,#7b00ff)"></div>
+          </div>
+          <div class="mock-label">Exposure</div>
+          <div class="mock-slider">
+            <div class="mock-slider-thumb"></div>
+          </div>
+          <div class="mock-label" style="margin-top:1rem">Saturation</div>
+          <div class="mock-slider" style="background:linear-gradient(90deg,#888,#ff4081)">
+            <div class="mock-slider-thumb" style="left:45%;background:var(--violet)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTES -->
+<div class="quote-strip">
+  <blockquote id="q-text">"Editing is not just cutting and arranging. It's storytelling, pacing, and rhythm."</blockquote>
+  <cite id="q-author">— Walter Murch, Legendary Film Editor</cite>
+  <div class="quote-dots" id="q-dots"></div>
+</div>
+
+<!-- AUDIO -->
+<div class="feature-section" id="audio-section">
+  <div class="feature-section-inner">
+    <div class="section-header reveal">
+      <h2><span class="grad-text">Audio</span> Editing</h2>
+      <p>Studio-quality sound engineering at your fingertips</p>
+    </div>
+    
+    <div class="photo-showcase triple reveal">
+      <div class="showcase-img short">
+        <img src="https://images.pexels.com/photos/3756766/pexels-photo-3756766.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Studio mixing console with faders and knobs" loading="lazy">
+        <div class="img-label"><span>Multi-track</span> Professional mixing console</div>
+      </div>
+      <div class="showcase-img short">
+        <img src="https://images.pexels.com/photos/164938/pexels-photo-164938.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Audio waveform visualization with editing markers" loading="lazy">
+        <div class="img-label"><span>Waveform</span> Precision sample editing</div>
+      </div>
+      <div class="showcase-img short">
+        <img src="https://images.pexels.com/photos/6953876/pexels-photo-6953876.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Podcast microphone with pop filter in recording studio" loading="lazy">
+        <div class="img-label"><span>Mastering</span> Broadcast-ready output</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHOTO -->
+<div class="feature-section" id="photo-section">
+  <div class="feature-section-inner">
+    <div class="section-header reveal">
+      <h2><span class="grad-text">Photo</span> Editing</h2>
+      <p>Transform your photos into stunning masterpieces</p>
+    </div>
+    
+    <div class="feat-photo-row reveal">
+      <div>
+        <div class="before-after" id="baSlider">
+          <div class="ba-after">
+            <img src="https://images.pexels.com/photos/1680140/pexels-photo-1680140.jpeg?auto=compress&cs=tinysrgb&w=800&dpr=2" alt="Color graded sunset landscape with vibrant colors" loading="lazy">
+          </div>
+          <div class="ba-before" id="baBefore">
+            <img src="https://images.pexels.com/photos/1680140/pexels-photo-1680140.jpeg?auto=compress&cs=tinysrgb&w=800&dpr=2" alt="Original flat sunset landscape before color grading" style="filter:saturate(0.15) brightness(0.9)" loading="lazy">
+          </div>
+          <div class="ba-tag before">Before</div>
+          <div class="ba-tag after">After</div>
+          <div class="ba-divider" id="baDivider"></div>
+          <div class="ba-handle" id="baHandle">⇔</div>
+        </div>
+      </div>
+      <div class="feat-text">
+        <h3>Color Grading<br><em style="background:linear-gradient(120deg,var(--cyan),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-style:normal">That Transforms</em></h3>
+        <p>Drag the slider to see the difference. Our cinema-grade color tools turn flat, dull footage into vivid, emotionally-charged visuals — in seconds.</p>
+        <div class="feat-tags">
+          <span class="feat-tag">HSL Curves</span>
+          <span class="feat-tag">LUT Library</span>
+          <span class="feat-tag">Skin Tone Protection</span>
+          <span class="feat-tag">One-click Presets</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="photo-showcase hero-split reveal" style="margin-top:1.5rem">
+      <div class="showcase-img wide">
+        <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=800&dpr=2" alt="Professional portrait retouching with natural skin enhancement" loading="lazy">
+        <div class="img-label"><span>AI Retouch</span> Portrait enhancement</div>
+      </div>
+      <div class="showcase-img square">
+        <img src="https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Product photography with batch editing workflow" loading="lazy">
+        <div class="img-label"><span>Batch</span> Product photography</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VIDEO -->
+<div class="feature-section" id="video-section">
+  <div class="feature-section-inner">
+    <div class="section-header reveal">
+      <h2><span class="grad-text">Video</span> Editing</h2>
+      <p>Create professional cinematic videos that stand out</p>
+    </div>
+
+    <div class="feat-photo-row flip reveal">
+      <div class="showcase-img wide" style="aspect-ratio:16/9">
+        <img src="https://images.pexels.com/photos/2873486/pexels-photo-2873486.jpeg?auto=compress&cs=tinysrgb&w=800&dpr=2" alt="Cinematic video editing workspace with multi-track timeline" loading="lazy">
+        <div class="img-label"><span>4K Timeline</span> Multi-track cinematic editing</div>
+      </div>
+      <div class="feat-text">
+        <h3>Edit at the<br><em style="background:linear-gradient(120deg,var(--violet),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-style:normal">Speed of Thought</em></h3>
+        <p>A timeline that keeps up with your creativity. Real-time 4K playback, magnetic timeline snapping, and intelligent clip management let you focus on the story.</p>
+        <div class="feat-tags">
+          <span class="feat-tag">4K / 8K Playback</span>
+          <span class="feat-tag">Magnetic Timeline</span>
+          <span class="feat-tag">200+ Effects</span>
+          <span class="feat-tag">Keyframe Animation</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="photo-showcase triple reveal" style="margin-top:1.5rem">
+      <div class="showcase-img short">
+        <img src="https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Music video production with color grading" loading="lazy">
+        <div class="img-label"><span>Video</span> Music video edit</div>
+      </div>
+      <div class="showcase-img short">
+        <img src="https://images.pexels.com/photos/2608517/pexels-photo-2608517.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Cinema-grade color grading with LUT application" loading="lazy">
+        <div class="img-label"><span>Color</span> Cinema grade LUTs</div>
+      </div>
+      <div class="showcase-img short">
+        <img src="https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Animated motion graphics and titles" loading="lazy">
+        <div class="img-label"><span>Motion</span> Animated titles</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div id="gallery">
+  <div class="gallery-inner">
+    <div class="section-header reveal">
+      <h2><span class="grad-text">Project</span> Gallery</h2>
+      <p>Showcase of creations made with Zenframe</p>
+    </div>
+    <div class="filter-bar">
+      <button class="fbtn active" data-filter="all">All</button>
+      <button class="fbtn" data-filter="photo">Photo</button>
+      <button class="fbtn" data-filter="video">Video</button>
+      <button class="fbtn" data-filter="audio">Audio</button>
+      <button class="fbtn" data-filter="motion">Motion</button>
+    </div>
+    <div class="gallery-grid" id="gGrid"></div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div style="padding:60px 0">
+  <div class="stats-row reveal">
+    <div class="stat-cell"><div class="stat-num">500K+</div><div class="stat-lbl">Active Creators</div></div>
+    <div class="stat-cell"><div class="stat-num">4.9★</div><div class="stat-lbl">Average Rating</div></div>
+    <div class="stat-cell"><div class="stat-num">99.9%</div><div class="stat-lbl">Uptime SLA</div></div>
+    <div class="stat-cell"><div class="stat-num">24/7</div><div class="stat-lbl">Support</div></div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div id="pricing">
+  <div class="pricing-inner">
+    <div class="section-header reveal" style="text-align:center">
+      <h2>Simple <span class="grad-text">Pricing</span></h2>
+      <p style="max-width:none">Choose the perfect plan for your needs</p>
+    </div>
+    <div class="pricing-grid reveal">
+      <div class="price-card">
+        <div class="price-tier">Free</div>
+        <div class="price-amount">$0</div>
+        <div class="price-desc">Perfect to get started</div>
+        <ul class="price-feats">
+          <li>Basic editing tools</li>
+          <li>2GB storage</li>
+          <li>Limited exports</li>
+        </ul>
+        <button class="price-btn ghost" data-plan="free">Get Started</button>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge">Most popular</div>
+        <div class="price-tier">Pro</div>
+        <div class="price-amount"><sup>$</sup>19<sub>/mo</sub></div>
+        <div class="price-desc">For serious creators</div>
+        <ul class="price-feats">
+          <li>Unlimited exports</li>
+          <li>500GB storage</li>
+          <li>All AI tools</li>
+          <li>Priority support</li>
+        </ul>
+        <button class="price-btn primary" data-plan="pro">Start Free Trial</button>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">Studio</div>
+        <div class="price-amount"><sup>$</sup>79<sub>/mo</sub></div>
+        <div class="price-desc">For professional teams</div>
+        <ul class="price-feats">
+          <li>Everything in Pro</li>
+          <li>2TB storage</li>
+          <li>Team collaboration</li>
+          <li>Dedicated support</li>
+        </ul>
+        <button class="price-btn ghost" data-plan="studio">Contact Sales</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAYMENT SECTION -->
+<div id="payment">
+  <div class="demo-notice reveal">
+    <div class="demo-badge">Demo Only</div>
+    <h3>Payment Integration Coming Soon</h3>
+    <p>This is a UI demonstration showcasing modern payment interface design. In production, this would integrate with Stripe or PayPal for secure, PCI-compliant payment processing.</p>
+    <p style="margin-top:1rem;font-size:0.8rem">⚠️ <strong>Never enter real payment details on demo sites.</strong> This form does not process or store any payment information.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <img src="https://messages-prod.27c852f3500f38c1e7786e2c9ff9e48f.r2.cloudflarestorage.com/019d9f6d-33c2-72f7-ab98-354d00929c8f/1778952601953-019e31d6-2d74-7738-a679-ac8a09d77044.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=b33de61d4f22a31b59b25364ab5037c5%2F20260516%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260516T173002Z&X-Amz-Expires=3600&X-Amz-Signature=e7a447c15ceb616ece10ab1485677f8749f82f10a632d1f2e8d2cb281fa60545&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject" alt="Brand Logo" class="footer-image">
+    <div class="footer-logo">Zenframe</div>
+  </div>
+  <p>© 2024 Zenframe. Empowering creators worldwide with professional-grade tools.</p>
+</footer>
+
+<script>
+// ─── WAVEFORM MOCK ───
+const wv = document.getElementById('waveform');
+if(wv){
+  for(let i=0;i<40;i++){
+    const b=document.createElement('div');
+    b.className='mock-bar-wave';
+    b.style.height=(15+Math.sin(i*0.8)*20+Math.random()*15)+'px';
+    b.style.opacity=(0.3+Math.random()*0.5).toString();
+    wv.appendChild(b);
+  }
+}
+
+// ─── QUOTES ───
+const quotes=[
+  {t:'"Editing is not just cutting and arranging. It\'s storytelling, pacing, and rhythm."',a:'— Walter Murch, Legendary Film Editor'},
+  {t:'"The edit is where the film is really made. You can\'t have a great film without a great editor."',a:'— Thelma Schoonmaker, Oscar-Winning Editor'},
+  {t:'"In editing, there\'s no room for ego. The film dictates what should be cut, and we listen."',a:'— Ralph Rosenblum, Pioneering Film Editor'},
+  {t:'"Color grading is like conducting an orchestra. Precision, timing, and emotion."',a:'— David Fincher, Director'},
+  {t:'"Good editing makes the audience forget they\'re watching an edit. They just feel the story."',a:'— Michael Kahn, A.C.E. Editor'},
+  {t:'"The power of editing is to make the invisible visible."',a:'— Marty Cohen, Award-Winning Editor'},
+];
+let qi=0;
+const qDots=document.getElementById('q-dots');
+quotes.forEach((_,i)=>{
+  const d=document.createElement('div');
+  d.className='qdot'+(i===0?' active':'');
+  d.onclick=()=>goQ(i);
+  qDots.appendChild(d);
+});
+function goQ(idx){
+  const qt=document.getElementById('q-text'),qa=document.getElementById('q-author');
+  qt.classList.add('fade-out');qa.classList.add('fade-out');
+  setTimeout(()=>{
+    qi=idx;
+    qt.textContent=quotes[qi].t;
+    qa.textContent=quotes[qi].a;
+    qt.classList.remove('fade-out');qa.classList.remove('fade-out');
+    document.querySelectorAll('.qdot').forEach((d,i)=>d.classList.toggle('active',i===qi));
+  },350);
+}
+setInterval(()=>goQ((qi+1)%quotes.length),5000);
+
+// ─── SCROLL NAV ───
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
+
+// ─── SMOOTH SCROLL ───
+function goTo(id){
+  const el=document.getElementById(id);
+  if(el) {
+    el.scrollIntoView({behavior:'smooth'});
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('mobileMenuBtn').textContent = '☰';
+  }
+}
+
+document.addEventListener('click', e => {
+  const target = e.target.closest('[data-scroll-to]');
+  if(target) {
+    e.preventDefault();
+    goTo(target.dataset.scrollTo);
+  }
+});
+
+// ─── MOBILE MENU ───
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const navLinks = document.getElementById('navLinks');
+
+mobileMenuBtn?.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+  mobileMenuBtn.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+});
+
+document.addEventListener('click', e => {
+  if(!e.target.closest('nav') && navLinks.classList.contains('open')) {
+    navLinks.classList.remove('open');
+    mobileMenuBtn.textContent = '☰';
+  }
+});
+
+// ─── ESC KEY ───
+window.addEventListener('keydown', e => {
+  if(e.key === 'Escape') {
+    if(navLinks.classList.contains('open')) {
+      navLinks.classList.remove('open');
+      mobileMenuBtn.textContent = '☰';
+    }
+    const modal = document.getElementById('freePlanModal');
+    if(modal.classList.contains('show')) {
+      modal.classList.remove('show');
+    }
+  }
+});
+
+// ─── FREE PLAN ERROR FLOW ───
+function showFreePlanError() {
+  const modal = document.getElementById('freePlanModal');
+  const content = document.getElementById('freeModalContent');
+  
+  content.innerHTML = `
+    <div class="free-modal-spinner">
+      <svg width="64" height="64" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="28" fill="none" stroke="rgba(0,229,255,0.15)" stroke-width="4"/>
+        <circle cx="32" cy="32" r="28" fill="none" stroke="var(--cyan)" stroke-width="4" 
+                stroke-dasharray="44 132" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="free-modal-title">Redirecting to Your Dashboard...</div>
+    <div class="free-modal-text">Please wait while we set up your free account</div>
+    <div class="free-modal-timer" id="freeTimer">10</div>
+  `;
+  
+  modal.classList.add('show');
+  
+  let countdown = 10;
+  const timerEl = document.getElementById('freeTimer');
+  
+  const interval = setInterval(() => {
+    countdown--;
+    if(timerEl) timerEl.textContent = countdown;
+    
+    if(countdown === 0) {
+      clearInterval(interval);
+      setTimeout(() => {
+        content.innerHTML = `
+          <div class="wifi-icon">📡</div>
+          <div class="free-modal-error-title">OOPS! SERVER PROBLEM</div>
+          <div class="free-modal-text" style="color:#f87171;font-weight:600;">
+            Unable to connect to server
+          </div>
+          <div class="free-modal-text">
+            Please check your internet connection and try again
+          </div>
+          <button class="free-modal-btn" onclick="closeFreeModal()">
+            Try Again
+          </button>
+          <p style="margin-top:1rem;font-size:0.8rem;color:var(--muted);">
+            Error Code: ERR_CONNECTION_TIMEOUT
+          </p>
+        `;
+      }, 500);
+    }
+  }, 1000);
+}
+
+function closeFreeModal() {
+  document.getElementById('freePlanModal').classList.remove('show');
+}
+
+// ─── PLAN SELECTION ───
+document.addEventListener('click', e => {
+  const btn = e.target.closest('[data-plan]');
+  if(!btn) return;
+  
+  const plan = btn.dataset.plan;
+  
+  if(plan === 'free') {
+    showFreePlanError();
+  } else {
+    goTo('payment');
+  }
+});
+
+document.getElementById('freePlanModal')?.addEventListener('click', function(e) {
+  if(e.target === this) closeFreeModal();
+});
+
+// ─── GALLERY ───
+const galleryData=[
+  {title:'Cinematic Sunset',sub:'Color grading',cat:'photo',img:'https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
+  {title:'Portrait Retouching',sub:'AI-enhanced beauty work',cat:'photo',img:'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2',wide:true,tall:true,featured:true},
+  {title:'Music Video Edit',sub:'4K cinematic editing',cat:'video',img:'https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
+  {title:'Podcast Production',sub:'Professional audio mix',cat:'audio',img:'https://images.pexels.com/photos/3587478/pexels-photo-3587478.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
+  {title:'Motion Design',sub:'3D animated titles',cat:'motion',img:'https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2',wide:true,featured:true},
+  {title:'Wedding Highlight',sub:'4K slow-mo sequences',cat:'video',img:'https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
+  {title:'Product Photography',sub:'E-commerce editing',cat:'photo',img:'https://images.pexels.com/photos/3962286/pexels-photo-3962286.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
+  {title:'Sound Design',sub:'Atmospheric audio layers',cat:'audio',img:'https://images.pexels.com/photos/3407617/pexels-photo-3407617.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
+  {title:'Brand Animation',sub:'Logo motion graphics',cat:'motion',img:'https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
+  {title:'Landscape Photography',sub:'Nature color grading',cat:'photo',img:'https://images.pexels.com/photos/1624496/pexels-photo-1624496.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
+];
+
+function renderGallery(filter){
+  const grid=document.getElementById('gGrid');
+  grid.style.opacity='0';
+  
+  setTimeout(() => {
+    grid.innerHTML='';
+    const items=filter==='all'?galleryData:galleryData.filter(i=>i.cat===filter);
+    items.forEach(item=>{
+      const d=document.createElement('div');
+      d.className='g-item'+(item.wide?' wide':'')+(item.tall?' tall':'');
+      d.innerHTML=`
+        <img src="${item.img}" alt="${item.title} - ${item.sub}" loading="lazy">
+        <div class="g-overlay">
+          <div class="g-title">${item.title}</div>
+          <div class="g-sub">${item.sub}</div>
+        </div>
+        ${item.featured?'<div class="g-badge">Featured</div>':''}
+      `;
+      grid.appendChild(d);
+    });
+    grid.style.opacity='1';
+  }, 200);
+}
+
+document.querySelector('.filter-bar')?.addEventListener('click', e => {
+  const btn = e.target.closest('.fbtn');
+  if(!btn) return;
+  
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGallery(btn.dataset.filter);
+});
+
+renderGallery('all');
+
+// ─── BEFORE/AFTER SLIDER ───
+const baSlider = document.getElementById('baSlider');
+if(baSlider) {
+  const baBefore = document.getElementById('baBefore');
+  const baDivider = document.getElementById('baDivider');
+  const baHandle = document.getElementById('baHandle');
+  let dragging = false;
+
+  function setPos(pct) {
+    pct = Math.max(5, Math.min(95, pct));
+    baBefore.style.clipPath = `inset(0 ${100-pct}% 0 0)`;
+    baDivider.style.left = pct + '%';
+    baHandle.style.left = pct + '%';
+  }
+
+  function getPercent(e) {
+    const rect = baSlider.getBoundingClientRect();
+    const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+    return (x / rect.width) * 100;
+  }
+
+  baSlider.addEventListener('mousedown', e => { 
+    e.preventDefault();
+    dragging = true; 
+    setPos(getPercent(e)); 
+  });
+  
+  baSlider.addEventListener('touchstart', e => { 
+    dragging = true; 
+    setPos(getPercent(e)); 
+  }, {passive: false});
+  
+  window.addEventListener('mousemove', e => { 
+    if(dragging) {
+      e.preventDefault();
+      setPos(getPercent(e)); 
+    }
+  });
+  
+  window.addEventListener('touchmove', e => { 
+    if(dragging) {
+      e.preventDefault();
+      setPos(getPercent(e)); 
+    }
+  }, {passive: false});
+  
+  window.addEventListener('mouseup', () => dragging = false);
+  window.addEventListener('touchend', () => dragging = false);
+  
+  setPos(50);
+}
+
+// ─── SCROLL REVEAL ───
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) e.target.classList.add('on');
+  });
+}, {threshold: 0.12, rootMargin: '0px 0px -40px 0px'});
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
