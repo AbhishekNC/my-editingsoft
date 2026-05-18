@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zenframe — Demo Landing Page | Abhishek NC</title>
-  <meta name="description" content="A portfolio demonstration of an all-in-one editing software landing page by Abhishek NC">
+  <title>Zenframe — All-in-One Creative Suite</title>
+  <meta name="description" content="Professional-grade audio, photo, and video editing software for creators">
   
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎬</text></svg>">
@@ -36,12 +36,11 @@
       color: var(--text);
       overflow-x: hidden;
       line-height: 1.6;
-      /* BACKGROUND PATTERN */
       background-image: 
-        radial-gradient(at 0% 0%, rgba(0, 229, 255, 0.1) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, rgba(124, 58, 237, 0.1) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(244, 63, 142, 0.1) 0px, transparent 50%),
-        radial-gradient(at 0% 100%, rgba(0, 229, 255, 0.05) 0px, transparent 50%);
+        radial-gradient(at 0% 0%, rgba(0, 229, 255, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(124, 58, 237, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(244, 63, 142, 0.08) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(0, 229, 255, 0.04) 0px, transparent 50%);
       background-attachment: fixed;
     }
 
@@ -53,7 +52,7 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 9999;
-      opacity: 0.4;
+      opacity: 0.5;
     }
 
     /* ─── BLOBS ─── */
@@ -67,21 +66,22 @@
     .blob {
       position: absolute;
       border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.18;
+      filter: blur(140px);
+      opacity: 0.15;
     }
-    .blob-1 { width: 600px; height: 600px; background: var(--cyan); top: -10%; left: -10%; animation: drift1 18s ease-in-out infinite; }
-    .blob-2 { width: 700px; height: 700px; background: var(--violet); bottom: -15%; right: -10%; animation: drift2 22s ease-in-out infinite; }
-    .blob-3 { width: 400px; height: 400px; background: var(--pink); top: 40%; right: 5%; animation: drift3 15s ease-in-out infinite; }
+    .blob-1 { width: 650px; height: 650px; background: var(--cyan); top: -10%; left: -10%; animation: drift1 20s ease-in-out infinite; }
+    .blob-2 { width: 750px; height: 750px; background: var(--violet); bottom: -15%; right: -10%; animation: drift2 25s ease-in-out infinite; }
+    .blob-3 { width: 450px; height: 450px; background: var(--pink); top: 40%; right: 5%; animation: drift3 18s ease-in-out infinite; }
 
-    @keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(60px,-80px)} }
-    @keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-70px,60px)} }
-    @keyframes drift3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,50px)} }
+    @keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(80px,-100px)} }
+    @keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-90px,80px)} }
+    @keyframes drift3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(60px,70px)} }
 
     /* ─── FOCUS STATES ─── */
     button:focus-visible, a:focus-visible, input:focus-visible {
       outline: 2px solid var(--cyan);
-      outline-offset: 2px;
+      outline-offset: 3px;
+      border-radius: 4px;
     }
 
     /* ─── NAV ─── */
@@ -90,65 +90,73 @@
       top: 0;
       width: 100%;
       z-index: 100;
-      padding: 1.25rem 5%;
+      padding: 1.5rem 6%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(5,5,8,0.6);
-      backdrop-filter: blur(24px);
+      background: rgba(5,5,8,0.4);
+      backdrop-filter: blur(24px) saturate(180%);
       border-bottom: 1px solid var(--border);
-      transition: background 0.3s;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    nav.scrolled { background: rgba(5,5,8,0.92); }
-
-    .logo-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      cursor: pointer;
-    }
-
-    .nav-logo-image {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      object-fit: cover;
-      opacity: 0;
-      transform: scale(0.8);
-      transition: all 0.4s ease;
-    }
-
-    nav.scrolled .nav-logo-image {
-      opacity: 1;
-      transform: scale(1);
-      border-color: var(--cyan);
+    nav.scrolled { 
+      background: rgba(5,5,8,0.95); 
+      padding: 1.25rem 6%;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
     }
 
     .logo {
       font-family: var(--font-display);
       font-size: 1.5rem;
       font-weight: 800;
-      letter-spacing: -0.04em;
-      background: linear-gradient(120deg, var(--cyan), var(--violet));
+      letter-spacing: -0.05em;
+      background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.3s ease;
     }
+    .logo:hover { transform: translateY(-2px); }
+    .logo::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--violet));
+      transition: width 0.3s ease;
+    }
+    .logo:hover::after { width: 100%; }
 
     .nav-links {
       display: flex;
       list-style: none;
-      gap: 2.5rem;
+      gap: 2.75rem;
     }
     .nav-links a {
       color: var(--muted);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       font-weight: 500;
-      transition: color 0.2s;
+      transition: color 0.3s ease;
       cursor: pointer;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--cyan);
+      transition: width 0.3s ease;
     }
     .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
 
     .mobile-menu-btn {
       display: none;
@@ -156,27 +164,43 @@
       border: 1px solid var(--border);
       color: var(--text);
       font-size: 1.5rem;
-      padding: 0.5rem 0.75rem;
-      border-radius: 8px;
+      padding: 0.6rem 0.9rem;
+      border-radius: 10px;
       cursor: pointer;
-      transition: border-color 0.2s;
+      transition: all 0.3s;
     }
-    .mobile-menu-btn:hover { border-color: rgba(255,255,255,0.2); }
+    .mobile-menu-btn:hover { border-color: var(--cyan); background: rgba(0,229,255,0.05); }
 
     .btn-primary {
       background: linear-gradient(135deg, var(--cyan), var(--violet));
       border: none;
       color: #fff;
-      padding: 0.7rem 1.8rem;
+      padding: 0.8rem 2rem;
       border-radius: 100px;
       font-family: var(--font-body);
-      font-weight: 500;
-      font-size: 0.9rem;
+      font-weight: 600;
+      font-size: 0.95rem;
       cursor: pointer;
-      transition: opacity 0.2s, transform 0.2s;
-      box-shadow: 0 0 30px rgba(0,229,255,0.15);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 20px rgba(0,229,255,0.25);
+      position: relative;
+      overflow: hidden;
     }
-    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    .btn-primary:hover::before { left: 100%; }
+    .btn-primary:hover { 
+      transform: translateY(-2px); 
+      box-shadow: 0 6px 30px rgba(0,229,255,0.4);
+    }
 
     /* ─── HERO ─── */
     .hero {
@@ -186,215 +210,227 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 140px 5% 80px;
+      padding: 160px 6% 100px;
     }
 
     .hero-eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       background: rgba(0,229,255,0.08);
-      border: 1px solid rgba(0,229,255,0.2);
+      border: 1px solid rgba(0,229,255,0.25);
       border-radius: 100px;
-      padding: 0.4rem 1.1rem;
-      font-size: 0.78rem;
+      padding: 0.5rem 1.3rem;
+      font-size: 0.8rem;
       color: var(--cyan);
-      font-weight: 500;
-      letter-spacing: 0.08em;
+      font-weight: 600;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 2rem;
-      animation: fadeUp 0.7s ease both;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+      box-shadow: 0 0 20px rgba(0,229,255,0.15);
     }
-    .hero-eyebrow span { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); display: inline-block; animation: blink 1.5s ease-in-out infinite; }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+    .hero-eyebrow span { 
+      width: 7px; 
+      height: 7px; 
+      border-radius: 50%; 
+      background: var(--cyan); 
+      display: inline-block; 
+      animation: blink 2s ease-in-out infinite;
+      box-shadow: 0 0 10px var(--cyan);
+    }
+    @keyframes blink { 0%,100%{opacity:1; transform:scale(1)} 50%{opacity:0.3; transform:scale(0.8)} }
 
     .hero h1 {
       font-family: var(--font-display);
-      font-size: clamp(3.2rem, 8vw, 6.5rem);
+      font-size: clamp(3.5rem, 9vw, 7rem);
       font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1.05;
-      margin-bottom: 1.5rem;
-      animation: fadeUp 0.7s ease 0.1s both;
+      letter-spacing: -0.05em;
+      line-height: 1.03;
+      margin-bottom: 1.75rem;
+      animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;
     }
     .hero h1 em {
       font-style: normal;
-      background: linear-gradient(120deg, var(--cyan) 0%, var(--violet) 50%, var(--pink) 100%);
+      background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 50%, var(--pink) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .hero p {
-      max-width: 580px;
+      max-width: 620px;
       color: var(--muted);
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 300;
-      line-height: 1.8;
-      margin-bottom: 2.5rem;
-      animation: fadeUp 0.7s ease 0.2s both;
+      line-height: 1.9;
+      margin-bottom: 3rem;
+      animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
     }
 
     .hero-ctas {
       display: flex;
-      gap: 1rem;
+      gap: 1.25rem;
       flex-wrap: wrap;
       justify-content: center;
-      animation: fadeUp 0.7s ease 0.3s both;
+      animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
     }
 
     .btn-ghost {
       background: transparent;
       border: 1px solid var(--border);
       color: var(--muted);
-      padding: 0.7rem 1.8rem;
+      padding: 0.8rem 2rem;
       border-radius: 100px;
       font-family: var(--font-body);
-      font-weight: 500;
-      font-size: 0.9rem;
+      font-weight: 600;
+      font-size: 0.95rem;
       cursor: pointer;
-      transition: border-color 0.2s, color 0.2s;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .btn-ghost:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+    .btn-ghost:hover { 
+      border-color: var(--cyan);
+      color: var(--text); 
+      background: rgba(0,229,255,0.05);
+      transform: translateY(-2px);
+    }
 
     .hero-media {
       margin-top: 5rem;
       width: 100%;
-      max-width: 1000px;
-      animation: fadeUp 0.9s ease 0.4s both;
+      max-width: 1100px;
+      animation: fadeUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
       position: relative;
     }
     .hero-caption {
       text-align: center;
       color: var(--muted);
-      font-size: 0.85rem;
-      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      margin-bottom: 1.25rem;
+      font-weight: 500;
     }
-    .hero-media img {
-      width: 100%;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      display: block;
-    }
-    .hero-media::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 16px;
-      box-shadow: inset 0 0 80px rgba(0,229,255,0.05), 0 40px 120px rgba(0,0,0,0.6);
-      pointer-events: none;
-    }
+
     .mock-screen {
       background: var(--surface);
-      border-radius: 16px;
+      border-radius: 20px;
       border: 1px solid var(--border);
       overflow: hidden;
+      box-shadow: 0 50px 100px rgba(0,0,0,0.5), 0 0 60px rgba(0,229,255,0.08);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+    }
+    .mock-screen:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 60px 120px rgba(0,0,0,0.6), 0 0 80px rgba(0,229,255,0.15);
     }
     .mock-bar {
       background: var(--surface2);
-      padding: 0.75rem 1rem;
+      padding: 0.9rem 1.25rem;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       border-bottom: 1px solid var(--border);
     }
-    .mock-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .mock-dot { width: 11px; height: 11px; border-radius: 50%; }
     .mock-bar-title {
       flex: 1;
       text-align: center;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       color: var(--muted);
+      font-weight: 500;
     }
     .mock-body {
       display: grid;
-      grid-template-columns: 220px 1fr 200px;
-      min-height: 340px;
+      grid-template-columns: 240px 1fr 220px;
+      min-height: 380px;
     }
     .mock-panel {
-      padding: 1rem;
+      padding: 1.25rem;
       border-right: 1px solid var(--border);
     }
     .mock-panel:last-child { border-right: none; border-left: 1px solid var(--border); }
     .mock-label {
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       color: var(--muted);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.9rem;
+      font-weight: 600;
     }
     .mock-track {
       background: var(--surface2);
-      border-radius: 4px;
-      height: 32px;
-      margin-bottom: 8px;
+      border-radius: 6px;
+      height: 36px;
+      margin-bottom: 10px;
       position: relative;
       overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.02);
     }
     .mock-track-fill {
       position: absolute;
       left: 0; top: 0; bottom: 0;
-      background: linear-gradient(90deg, rgba(0,229,255,0.3), rgba(124,58,237,0.3));
-      border-radius: 4px;
+      border-radius: 6px;
     }
     .mock-waveform {
       display: flex;
       align-items: center;
-      gap: 2px;
-      height: 60px;
-      padding: 0 4px;
+      gap: 3px;
+      height: 65px;
+      padding: 0 6px;
     }
     .mock-bar-wave {
       flex: 1;
-      border-radius: 2px;
+      border-radius: 3px;
       background: linear-gradient(180deg, var(--cyan), var(--violet));
-      opacity: 0.6;
+      opacity: 0.7;
     }
     .mock-thumb {
-      width: 2px;
+      width: 3px;
       background: var(--cyan);
       position: absolute;
       top: 0; bottom: 0;
       left: 30%;
-      box-shadow: 0 0 8px var(--cyan);
+      box-shadow: 0 0 12px var(--cyan);
+      border-radius: 2px;
     }
     .mock-preview {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.85;
+      opacity: 0.9;
       display: block;
     }
     .mock-color-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 1rem;
+      gap: 10px;
+      margin-bottom: 1.25rem;
     }
     .mock-color-wheel {
       aspect-ratio: 1;
       border-radius: 50%;
       background: conic-gradient(from 0deg, #ff006e, #7b00ff, #00d4ff, #00ff88, #ffdd00, #ff006e);
-      opacity: 0.7;
+      opacity: 0.75;
       border: 2px solid var(--border);
     }
     .mock-slider {
-      height: 4px;
+      height: 5px;
       background: linear-gradient(90deg, #000, #fff);
-      border-radius: 2px;
-      margin-bottom: 8px;
+      border-radius: 3px;
+      margin-bottom: 10px;
       position: relative;
     }
     .mock-slider-thumb {
       position: absolute;
       left: 60%;
-      top: -4px;
-      width: 10px;
-      height: 12px;
+      top: -5px;
+      width: 12px;
+      height: 15px;
       background: var(--cyan);
-      border-radius: 2px;
+      border-radius: 3px;
+      box-shadow: 0 0 8px var(--cyan);
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
+      from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -402,207 +438,163 @@
     .quote-strip {
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      padding: 3rem 5%;
+      padding: 3.5rem 6%;
       text-align: center;
       position: relative;
+      background: rgba(0,229,255,0.02);
     }
     .quote-strip blockquote {
       font-family: var(--font-display);
-      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-      font-weight: 600;
+      font-size: clamp(1.15rem, 2.8vw, 1.75rem);
+      font-weight: 700;
       color: var(--text);
-      max-width: 800px;
-      margin: 0 auto 0.75rem;
-      letter-spacing: -0.02em;
-      transition: opacity 0.4s, transform 0.4s;
+      max-width: 850px;
+      margin: 0 auto 1rem;
+      letter-spacing: -0.03em;
+      transition: opacity 0.5s, transform 0.5s;
+      line-height: 1.5;
     }
-    .quote-strip blockquote.fade-out { opacity: 0; transform: translateY(-8px); }
+    .quote-strip blockquote.fade-out { opacity: 0; transform: translateY(-12px); }
     .quote-strip cite {
       color: var(--muted);
       font-style: normal;
-      font-size: 0.9rem;
-      transition: opacity 0.4s;
+      font-size: 0.95rem;
+      transition: opacity 0.5s;
+      font-weight: 500;
     }
     .quote-strip cite.fade-out { opacity: 0; }
-    .quote-dots { display: flex; justify-content: center; gap: 8px; margin-top: 1.5rem; }
+    .quote-dots { display: flex; justify-content: center; gap: 10px; margin-top: 2rem; }
     .qdot {
-      width: 6px; height: 6px; border-radius: 50%;
+      width: 7px; height: 7px; border-radius: 50%;
       background: var(--border);
       cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
+      transition: all 0.3s;
     }
-    .qdot.active { background: var(--cyan); transform: scale(1.4); }
+    .qdot:hover { background: rgba(0,229,255,0.5); transform: scale(1.2); }
+    .qdot.active { background: var(--cyan); transform: scale(1.5); box-shadow: 0 0 10px var(--cyan); }
 
     /* ─── SECTION BASE ─── */
     .section {
-      padding: 100px 5%;
-      max-width: 1280px;
+      padding: 120px 6%;
+      max-width: 1400px;
       margin: 0 auto;
     }
 
     .section-header {
-      margin-bottom: 3.5rem;
+      margin-bottom: 4rem;
     }
     .section-header h2 {
       font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(2.25rem, 4.5vw, 3.5rem);
       font-weight: 800;
-      letter-spacing: -0.04em;
-      margin-bottom: 0.75rem;
+      letter-spacing: -0.05em;
+      margin-bottom: 1rem;
+      line-height: 1.1;
     }
-    .section-header p { color: var(--muted); font-size: 1rem; max-width: 500px; }
+    .section-header p { color: var(--muted); font-size: 1.1rem; max-width: 550px; line-height: 1.7; }
 
     .grad-text {
-      background: linear-gradient(120deg, var(--cyan), var(--violet));
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     /* ─── FEATURE TABS ─── */
-    .feature-section { padding: 80px 5%; border-top: 1px solid var(--border); }
-    .feature-section-inner { max-width: 1280px; margin: 0 auto; }
-
-    .feature-tabs {
-      display: flex;
-      gap: 0;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 2.5rem;
-      background: var(--surface);
-    }
-    .ftab {
-      flex: 1;
-      padding: 1rem 1.5rem;
-      background: transparent;
-      border: none;
-      color: var(--muted);
-      font-family: var(--font-display);
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      border-right: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .ftab:last-child { border-right: none; }
-    .ftab:hover { color: var(--text); background: var(--surface2); }
-    .ftab.active { background: linear-gradient(135deg, rgba(0,229,255,0.12), rgba(124,58,237,0.12)); color: var(--cyan); border-bottom: 2px solid var(--cyan); }
-
-    .ftab-content { display: none; }
-    .ftab-content.active { display: block; animation: fadeUp 0.4s ease both; }
-    .cards-layout { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
-    .ftab-content.active .detail-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-
-    /* ─── CARDS ─── */
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .card:hover {
-      border-color: rgba(0,229,255,0.2);
-      transform: translateY(-4px);
-    }
-    .card-icon {
-      width: 40px; height: 40px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, rgba(0,229,255,0.15), rgba(124,58,237,0.15));
-      border: 1px solid rgba(0,229,255,0.15);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem;
-      margin-bottom: 1.25rem;
-    }
-    .card h3 {
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.02em;
-    }
-    .card p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+    .feature-section { padding: 100px 6%; border-top: 1px solid var(--border); }
+    .feature-section-inner { max-width: 1400px; margin: 0 auto; }
 
     /* ─── GALLERY ─── */
-    #gallery { padding: 100px 5%; border-top: 1px solid var(--border); }
-    .gallery-inner { max-width: 1280px; margin: 0 auto; }
+    #gallery { padding: 120px 6%; border-top: 1px solid var(--border); }
+    .gallery-inner { max-width: 1400px; margin: 0 auto; }
 
     .filter-bar {
       display: flex;
-      gap: 0.5rem;
-      margin-bottom: 2rem;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
       flex-wrap: wrap;
     }
     .fbtn {
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--muted);
-      padding: 0.5rem 1.2rem;
+      padding: 0.6rem 1.5rem;
       border-radius: 100px;
-      font-size: 0.85rem;
-      font-weight: 500;
+      font-size: 0.9rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.3s;
       font-family: var(--font-body);
     }
-    .fbtn:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
-    .fbtn.active { background: rgba(0,229,255,0.1); border-color: rgba(0,229,255,0.3); color: var(--cyan); }
+    .fbtn:hover { 
+      color: var(--text); 
+      border-color: rgba(0,229,255,0.3); 
+      background: rgba(0,229,255,0.05);
+    }
+    .fbtn.active { 
+      background: rgba(0,229,255,0.12); 
+      border-color: rgba(0,229,255,0.4); 
+      color: var(--cyan);
+      box-shadow: 0 0 20px rgba(0,229,255,0.15);
+    }
 
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      grid-auto-rows: 220px;
-      gap: 1rem;
-      transition: opacity 0.3s ease;
+      grid-auto-rows: 240px;
+      gap: 1.25rem;
+      transition: opacity 0.4s ease;
     }
     .g-item {
-      border-radius: 14px;
+      border-radius: 16px;
       overflow: hidden;
       position: relative;
       cursor: pointer;
+      border: 1px solid var(--border);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .g-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
     }
     .g-item.wide { grid-column: span 2; }
     .g-item.tall { grid-row: span 2; }
     .g-item img {
       width: 100%; height: 100%;
       object-fit: cover;
-      transition: transform 0.5s ease;
+      transition: transform 0.6s ease;
       display: block;
     }
-    .g-item:hover img { transform: scale(1.06); }
+    .g-item:hover img { transform: scale(1.08); }
     .g-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.85) 100%);
+      background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.9) 100%);
       opacity: 0;
-      transition: opacity 0.3s;
+      transition: opacity 0.4s;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 1.25rem;
+      padding: 1.5rem;
     }
     .g-item:hover .g-overlay { opacity: 1; }
     .g-title {
       font-family: var(--font-display);
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: #fff;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
     }
-    .g-sub { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top: 2px; }
+    .g-sub { font-size: 0.85rem; color: rgba(255,255,255,0.65); margin-top: 4px; }
     .g-badge {
       position: absolute;
-      top: 10px; right: 10px;
+      top: 12px; right: 12px;
       background: linear-gradient(135deg, var(--cyan), var(--violet));
       color: #fff;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       font-weight: 700;
-      padding: 3px 10px;
+      padding: 4px 12px;
       border-radius: 100px;
+      box-shadow: 0 4px 15px rgba(0,229,255,0.3);
     }
 
     /* ─── STATS ─── */
@@ -612,149 +604,164 @@
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 20px;
       overflow: hidden;
-      margin: 0 5%;
+      margin: 0 6%;
     }
     .stat-cell {
       background: var(--surface);
-      padding: 2.5rem 2rem;
+      padding: 3rem 2.5rem;
       text-align: center;
+      transition: background 0.3s;
     }
+    .stat-cell:hover { background: var(--surface2); }
     .stat-num {
       font-family: var(--font-display);
-      font-size: 2.5rem;
+      font-size: 2.75rem;
       font-weight: 800;
-      letter-spacing: -0.04em;
-      background: linear-gradient(120deg, var(--cyan), var(--violet));
+      letter-spacing: -0.05em;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.5rem;
     }
-    .stat-lbl { color: var(--muted); font-size: 0.875rem; }
+    .stat-lbl { color: var(--muted); font-size: 0.95rem; font-weight: 500; }
 
     /* ─── PRICING ─── */
-    #pricing { padding: 100px 5%; border-top: 1px solid var(--border); }
-    .pricing-inner { max-width: 1000px; margin: 0 auto; }
+    #pricing { padding: 120px 6%; border-top: 1px solid var(--border); }
+    .pricing-inner { max-width: 1100px; margin: 0 auto; }
     .pricing-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      gap: 2rem;
     }
     .price-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 2rem;
+      border-radius: 24px;
+      padding: 2.5rem;
       position: relative;
-      transition: transform 0.3s, border-color 0.3s;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .price-card:hover { transform: translateY(-4px); }
+    .price-card:hover { 
+      transform: translateY(-8px); 
+      border-color: rgba(0,229,255,0.3);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
     .price-card.featured {
-      border: 1.5px solid rgba(0,229,255,0.4);
-      background: linear-gradient(135deg, rgba(0,229,255,0.04), rgba(124,58,237,0.04));
+      border: 2px solid rgba(0,229,255,0.5);
+      background: linear-gradient(135deg, rgba(0,229,255,0.05), rgba(124,58,237,0.05));
+      box-shadow: 0 0 40px rgba(0,229,255,0.15);
     }
     .price-badge {
       position: absolute;
-      top: -12px; left: 50%; transform: translateX(-50%);
+      top: -14px; left: 50%; transform: translateX(-50%);
       background: linear-gradient(135deg, var(--cyan), var(--violet));
       color: #fff;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       font-weight: 700;
-      padding: 4px 14px;
+      padding: 5px 16px;
       border-radius: 100px;
       white-space: nowrap;
+      box-shadow: 0 4px 15px rgba(0,229,255,0.3);
     }
     .price-tier {
       font-family: var(--font-display);
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       color: var(--muted);
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
     }
     .price-amount {
       font-family: var(--font-display);
-      font-size: 3rem;
+      font-size: 3.5rem;
       font-weight: 800;
-      letter-spacing: -0.04em;
-      margin-bottom: 0.25rem;
+      letter-spacing: -0.05em;
+      margin-bottom: 0.5rem;
     }
-    .price-amount sup { font-size: 1.2rem; vertical-align: super; }
-    .price-amount sub { font-size: 1rem; font-weight: 400; color: var(--muted); vertical-align: baseline; }
-    .price-desc { color: var(--muted); font-size: 0.875rem; margin-bottom: 1.5rem; }
+    .price-amount sup { font-size: 1.4rem; vertical-align: super; }
+    .price-amount sub { font-size: 1.1rem; font-weight: 400; color: var(--muted); vertical-align: baseline; }
+    .price-desc { color: var(--muted); font-size: 0.95rem; margin-bottom: 2rem; }
     .price-feats {
       list-style: none;
       border-top: 1px solid var(--border);
-      padding-top: 1.25rem;
-      margin-bottom: 1.75rem;
+      padding-top: 1.5rem;
+      margin-bottom: 2rem;
     }
     .price-feats li {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.875rem;
+      gap: 10px;
+      font-size: 0.95rem;
       color: var(--muted);
-      padding: 0.4rem 0;
+      padding: 0.5rem 0;
     }
-    .price-feats li::before { content: '✓'; color: var(--cyan); font-weight: 700; }
+    .price-feats li::before { content: '✓'; color: var(--cyan); font-weight: 700; font-size: 1.1rem; }
     .price-btn {
       width: 100%;
-      padding: 0.85rem;
-      border-radius: 10px;
+      padding: 1rem;
+      border-radius: 12px;
       font-family: var(--font-body);
-      font-weight: 500;
-      font-size: 0.9rem;
+      font-weight: 600;
+      font-size: 1rem;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.3s;
     }
     .price-btn.ghost {
       background: transparent;
       border: 1px solid var(--border);
       color: var(--muted);
     }
-    .price-btn.ghost:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+    .price-btn.ghost:hover { 
+      border-color: var(--cyan); 
+      color: var(--text); 
+      background: rgba(0,229,255,0.05);
+    }
     .price-btn.primary {
       background: linear-gradient(135deg, var(--cyan), var(--violet));
       border: none;
       color: #fff;
-      box-shadow: 0 8px 30px rgba(0,229,255,0.2);
+      box-shadow: 0 10px 30px rgba(0,229,255,0.25);
     }
-    .price-btn.primary:hover { opacity: 0.9; transform: translateY(-2px); }
+    .price-btn.primary:hover { 
+      transform: translateY(-2px); 
+      box-shadow: 0 15px 40px rgba(0,229,255,0.35);
+    }
 
-    /* ─── DEMO PAYMENT NOTICE ─── */
-    #payment { padding: 60px 5%; }
+    /* ─── DEMO NOTICE ─── */
+    #payment { padding: 80px 6%; }
     .demo-notice {
-      max-width: 800px;
+      max-width: 850px;
       margin: 0 auto;
       background: var(--surface);
-      border: 1px dashed rgba(244,63,142,0.3);
-      border-radius: 16px;
-      padding: 2rem;
+      border: 1px dashed rgba(244,63,142,0.4);
+      border-radius: 20px;
+      padding: 2.5rem;
       text-align: center;
     }
     .demo-badge {
       display: inline-block;
-      background: rgba(244,63,142,0.1);
-      border: 1px solid rgba(244,63,142,0.3);
+      background: rgba(244,63,142,0.12);
+      border: 1px solid rgba(244,63,142,0.4);
       color: var(--pink);
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      padding: 3px 12px;
+      padding: 4px 14px;
       border-radius: 100px;
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
     }
     .demo-notice h3 {
       font-family: var(--font-display);
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
     }
-    .demo-notice p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+    .demo-notice p { color: var(--muted); font-size: 0.95rem; line-height: 1.8; }
 
     /* ─── FREE PLAN ERROR MODAL ─── */
     .free-plan-modal {
@@ -762,8 +769,8 @@
       position: fixed;
       inset: 0;
       z-index: 10000;
-      background: rgba(0,0,0,0.92);
-      backdrop-filter: blur(12px);
+      background: rgba(0,0,0,0.94);
+      backdrop-filter: blur(16px);
       align-items: center;
       justify-content: center;
       animation: fadeIn 0.3s ease;
@@ -778,29 +785,30 @@
     .free-modal-box {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 3rem 2.5rem;
-      max-width: 480px;
+      border-radius: 28px;
+      padding: 3.5rem 3rem;
+      max-width: 500px;
       width: 90%;
       text-align: center;
-      animation: slideUp 0.4s ease;
+      animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
     }
 
     @keyframes slideUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(50px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .free-modal-spinner {
-      width: 64px;
-      height: 64px;
-      margin: 0 auto 1.5rem;
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 2rem;
       position: relative;
     }
 
     .free-modal-spinner svg {
-      animation: spin 1s linear infinite;
+      animation: spin 1.2s linear infinite;
     }
 
     @keyframes spin {
@@ -809,165 +817,154 @@
 
     .free-modal-title {
       font-family: var(--font-display);
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.75rem;
-      background: linear-gradient(120deg, var(--cyan), var(--violet));
+      letter-spacing: -0.04em;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .free-modal-text {
       color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.7;
-      margin-bottom: 1.25rem;
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
     }
 
     .free-modal-timer {
       font-family: var(--font-display);
-      font-size: 2.5rem;
+      font-size: 3rem;
       font-weight: 800;
       color: var(--cyan);
-      margin: 1rem 0;
-      letter-spacing: -0.04em;
+      margin: 1.5rem 0;
+      letter-spacing: -0.05em;
+      text-shadow: 0 0 20px rgba(0,229,255,0.3);
     }
 
     .wifi-icon {
-      font-size: 4rem;
-      margin: 1.5rem 0;
-      opacity: 0.3;
-      animation: pulse 2s ease-in-out infinite;
+      font-size: 4.5rem;
+      margin: 2rem 0;
+      opacity: 0.35;
+      animation: pulse 2.5s ease-in-out infinite;
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 0.3; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(1.05); }
+      0%, 100% { opacity: 0.35; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.08); }
     }
 
     .free-modal-error-title {
       font-family: var(--font-display);
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.75rem;
+      letter-spacing: -0.04em;
+      margin-bottom: 1rem;
       color: #f87171;
     }
 
     .free-modal-btn {
-      margin-top: 1.5rem;
-      padding: 0.9rem 2rem;
+      margin-top: 2rem;
+      padding: 1rem 2.5rem;
       background: linear-gradient(135deg, var(--cyan), var(--violet));
       border: none;
-      border-radius: 12px;
+      border-radius: 14px;
       color: #fff;
       font-family: var(--font-display);
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 700;
       cursor: pointer;
-      transition: opacity 0.2s, transform 0.2s;
+      transition: all 0.3s;
+      box-shadow: 0 8px 25px rgba(0,229,255,0.3);
     }
 
     .free-modal-btn:hover {
-      opacity: 0.88;
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(0,229,255,0.4);
     }
 
     /* ─── FOOTER ─── */
     footer {
       border-top: 1px solid var(--border);
-      padding: 2.5rem 5%;
+      padding: 3rem 6%;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 1.5rem;
+      gap: 2rem;
+      background: rgba(0,229,255,0.01);
     }
     .footer-logo {
       font-family: var(--font-display);
-      font-size: 1.1rem;
+      font-size: 1.25rem;
       font-weight: 800;
-      letter-spacing: -0.04em;
-      background: linear-gradient(120deg, var(--cyan), var(--violet));
+      letter-spacing: -0.05em;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    .footer-image {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      object-fit: cover;
-      transition: transform 0.3s, border-color 0.3s;
-    }
-    .footer-image:hover {
-      transform: scale(1.05);
-      border-color: var(--cyan);
-    }
-    footer p { color: var(--muted); font-size: 0.85rem; }
+    footer p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
 
     /* ─── SCROLL REVEAL ─── */
-    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
     .reveal.on { opacity: 1; transform: none; }
 
     /* ─── PHOTO SHOWCASES ─── */
     .photo-showcase {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-top: 2.5rem;
+      gap: 2rem;
+      margin-top: 3rem;
     }
     .photo-showcase.triple { grid-template-columns: 1fr 1fr 1fr; }
-    .photo-showcase.hero-split { grid-template-columns: 1.4fr 1fr; gap: 1.5rem; }
+    .photo-showcase.hero-split { grid-template-columns: 1.5fr 1fr; gap: 2rem; }
 
     .showcase-img {
       position: relative;
-      border-radius: 16px;
+      border-radius: 18px;
       overflow: hidden;
       border: 1px solid var(--border);
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+    .showcase-img:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
     }
     .showcase-img img {
       width: 100%; height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.6s ease;
+      transition: transform 0.7s ease;
     }
-    .showcase-img:hover img { transform: scale(1.04); }
+    .showcase-img:hover img { transform: scale(1.06); }
     .showcase-img .img-label {
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      padding: 1.25rem;
-      background: linear-gradient(180deg, transparent, rgba(0,0,0,0.85));
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: rgba(255,255,255,0.7);
+      padding: 1.5rem;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,0.9));
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.75);
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
     .showcase-img .img-label span {
-      background: rgba(0,229,255,0.15);
-      border: 1px solid rgba(0,229,255,0.25);
+      background: rgba(0,229,255,0.18);
+      border: 1px solid rgba(0,229,255,0.3);
       color: var(--cyan);
-      font-size: 0.7rem;
-      padding: 2px 8px;
+      font-size: 0.75rem;
+      padding: 3px 10px;
       border-radius: 100px;
+      font-weight: 700;
     }
-    .showcase-img.tall { aspect-ratio: 2/3; }
-    .showcase-img.wide { aspect-ratio: 16/9; }
-    .showcase-img.square { aspect-ratio: 1; }
     .showcase-img.short { aspect-ratio: 3/2; }
 
     /* before/after strip */
     .before-after {
       position: relative;
-      border-radius: 16px;
+      border-radius: 18px;
       overflow: hidden;
       border: 1px solid var(--border);
       aspect-ratio: 16/9;
@@ -991,11 +988,11 @@
       position: absolute;
       top: 0; bottom: 0;
       left: 50%;
-      width: 2px;
+      width: 3px;
       background: var(--cyan);
       transform: translateX(-50%);
       z-index: 3;
-      box-shadow: 0 0 12px var(--cyan);
+      box-shadow: 0 0 15px var(--cyan);
       transition: left 0.05s;
     }
     .ba-handle {
@@ -1003,86 +1000,89 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%,-50%);
-      width: 36px; height: 36px;
+      width: 40px; height: 40px;
       border-radius: 50%;
       background: var(--cyan);
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: #000;
       font-weight: 900;
-      box-shadow: 0 0 20px rgba(0,229,255,0.5);
+      box-shadow: 0 0 25px rgba(0,229,255,0.6);
       z-index: 4;
       cursor: col-resize;
       transition: left 0.05s;
     }
     .ba-tag {
       position: absolute;
-      top: 12px;
-      font-size: 0.7rem;
+      top: 14px;
+      font-size: 0.75rem;
       font-weight: 700;
-      padding: 3px 10px;
+      padding: 4px 12px;
       border-radius: 100px;
       z-index: 5;
       pointer-events: none;
     }
-    .ba-tag.before { left: 12px; background: rgba(0,0,0,0.6); color: #aaa; border: 1px solid rgba(255,255,255,0.15); }
-    .ba-tag.after  { right: 12px; background: rgba(0,229,255,0.15); color: var(--cyan); border: 1px solid rgba(0,229,255,0.3); }
+    .ba-tag.before { left: 14px; background: rgba(0,0,0,0.7); color: #aaa; border: 1px solid rgba(255,255,255,0.2); }
+    .ba-tag.after  { right: 14px; background: rgba(0,229,255,0.18); color: var(--cyan); border: 1px solid rgba(0,229,255,0.4); }
 
     /* feature photo row */
     .feat-photo-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      gap: 2.5rem;
       align-items: center;
-      margin-top: 2.5rem;
+      margin-top: 3rem;
     }
     .feat-photo-row.flip { direction: rtl; }
     .feat-photo-row.flip > * { direction: ltr; }
     .feat-photo-row img {
       width: 100%;
-      border-radius: 16px;
+      border-radius: 18px;
       border: 1px solid var(--border);
       display: block;
     }
     .feat-text h3 {
       font-family: var(--font-display);
-      font-size: 1.6rem;
+      font-size: 1.75rem;
       font-weight: 800;
-      letter-spacing: -0.04em;
-      margin-bottom: 0.75rem;
+      letter-spacing: -0.05em;
+      margin-bottom: 1rem;
+      line-height: 1.2;
     }
-    .feat-text p { color: var(--muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
-    .feat-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .feat-text p { color: var(--muted); font-size: 1rem; line-height: 1.9; margin-bottom: 1.25rem; }
+    .feat-tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .feat-tag {
-      background: rgba(0,229,255,0.08);
-      border: 1px solid rgba(0,229,255,0.15);
+      background: rgba(0,229,255,0.1);
+      border: 1px solid rgba(0,229,255,0.2);
       color: var(--cyan);
-      font-size: 0.75rem;
-      padding: 3px 10px;
+      font-size: 0.8rem;
+      padding: 4px 12px;
       border-radius: 100px;
+      font-weight: 600;
     }
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
       .mobile-menu-btn { display: block !important; }
+      .btn-primary { display: none; }
       .nav-links {
         position: fixed;
-        top: 70px;
+        top: 80px;
         right: -100%;
-        width: 250px;
-        height: calc(100vh - 70px);
+        width: 280px;
+        height: calc(100vh - 80px);
         background: var(--surface);
         border-left: 1px solid var(--border);
         flex-direction: column;
-        padding: 2rem 1.5rem;
-        gap: 1.5rem;
-        transition: right 0.3s ease;
+        padding: 2.5rem 2rem;
+        gap: 2rem;
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 99;
+        box-shadow: -10px 0 40px rgba(0,0,0,0.5);
       }
       .nav-links.open { right: 0; }
       .mock-body { grid-template-columns: 1fr; }
       .mock-panel:not(:first-child) { display: none; }
-      .cards-layout { grid-template-columns: 1fr 1fr; }
       .gallery-grid { grid-template-columns: repeat(2,1fr); }
       .g-item.wide { grid-column: span 2; }
       .stats-row { grid-template-columns: repeat(2,1fr); }
@@ -1095,10 +1095,9 @@
       footer { flex-direction: column; text-align: center; }
     }
     @media (max-width: 600px) {
-      .cards-layout { grid-template-columns: 1fr; }
       .gallery-grid { 
         grid-template-columns: 1fr; 
-        grid-auto-rows: 200px; 
+        grid-auto-rows: 220px; 
       }
       .g-item.wide, .g-item.tall { 
         grid-column: span 1; 
@@ -1146,10 +1145,7 @@
 
 <!-- NAV -->
 <nav id="nav">
-  <div class="logo-wrapper" data-scroll-to="home">
-    <img src="https://messages-prod.27c852f3500f38c1e7786e2c9ff9e48f.r2.cloudflarestorage.com/019d9f6d-33c2-72f7-ab98-354d00929c8f/1778952601953-019e31d6-2d74-7738-a679-ac8a09d77044.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=b33de61d4f22a31b59b25364ab5037c5%2F20260516%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260516T173002Z&X-Amz-Expires=3600&X-Amz-Signature=e7a447c15ceb616ece10ab1485677f8749f82f10a632d1f2e8d2cb281fa60545&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject" alt="Zenframe Logo" class="nav-logo-image">
-    <div class="logo">Zenframe</div>
-  </div>
+  <div class="logo" data-scroll-to="home">Zenframe</div>
   <ul class="nav-links" id="navLinks">
     <li><a data-scroll-to="audio-section">Audio</a></li>
     <li><a data-scroll-to="photo-section">Photo</a></li>
@@ -1158,22 +1154,22 @@
     <li><a data-scroll-to="pricing">Pricing</a></li>
   </ul>
   <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-  <button class="btn-primary" data-scroll-to="pricing">Start Free Trial — No Card Required →</button>
+  <button class="btn-primary" data-scroll-to="pricing">Start Free Trial</button>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-eyebrow"><span></span>Portfolio Demo Project</div>
-  <h1>Professional Editing,<br><em>Simplified.</em></h1>
-  <p>All-in-one software for creators. Edit photos, videos, and audio with professional-grade tools — no learning curve. Pure creation.</p>
+  <div class="hero-eyebrow"><span></span>Professional Creative Suite</div>
+  <h1>All-in-One Editing,<br><em>Perfected.</em></h1>
+  <p>Professional-grade tools for audio, photo, and video editing. Built for creators who demand precision without complexity.</p>
   <div class="hero-ctas">
     <button class="btn-primary" data-scroll-to="audio-section">Explore Features</button>
-    <button class="btn-ghost" data-scroll-to="gallery">See Showcase</button>
+    <button class="btn-ghost" data-scroll-to="gallery">View Gallery</button>
   </div>
 
   <!-- Fake app UI mockup -->
   <div class="hero-media reveal">
-    <p class="hero-caption">↓ Interactive editing interface — Audio, Video & Photo in one workspace</p>
+    <p class="hero-caption">↓ Unified workspace for audio, video & photo editing</p>
     <div class="mock-screen">
       <div class="mock-bar">
         <div class="mock-dot" style="background:#ff5f57"></div>
@@ -1188,13 +1184,13 @@
           <div class="mock-track"><div class="mock-track-fill" style="width:55%; background:linear-gradient(90deg,rgba(124,58,237,0.4),rgba(124,58,237,0.1))"></div></div>
           <div class="mock-track"><div class="mock-track-fill" style="width:90%; background:linear-gradient(90deg,rgba(244,63,142,0.4),rgba(244,63,142,0.1))"></div></div>
           <div class="mock-track"><div class="mock-track-fill" style="width:40%; background:linear-gradient(90deg,rgba(0,229,255,0.3),rgba(0,229,255,0.05))"></div></div>
-          <div style="margin-top:1rem">
+          <div style="margin-top:1.25rem">
             <div class="mock-label">Waveform</div>
             <div class="mock-waveform" id="waveform"></div>
           </div>
         </div>
         <div class="mock-panel" style="flex:1; padding:0">
-          <img class="mock-preview" src="https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Zenframe color grading interface showing sunset landscape with color adjustment panels" loading="eager">
+          <img class="mock-preview" src="https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Professional color grading interface" loading="eager">
         </div>
         <div class="mock-panel">
           <div class="mock-label">Color Wheels</div>
@@ -1228,21 +1224,21 @@
   <div class="feature-section-inner">
     <div class="section-header reveal">
       <h2><span class="grad-text">Audio</span> Editing</h2>
-      <p>Studio-quality sound engineering at your fingertips</p>
+      <p>Studio-quality sound engineering with precision tools</p>
     </div>
     
     <div class="photo-showcase triple reveal">
       <div class="showcase-img short">
-        <img src="https://images.pexels.com/photos/3756766/pexels-photo-3756766.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Studio mixing console with faders and knobs" loading="lazy">
-        <div class="img-label"><span>Multi-track</span> Professional mixing console</div>
+        <img src="https://images.pexels.com/photos/3756766/pexels-photo-3756766.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Professional mixing console" loading="lazy">
+        <div class="img-label"><span>Multi-track</span> Professional mixing</div>
       </div>
       <div class="showcase-img short">
-        <img src="https://images.pexels.com/photos/164938/pexels-photo-164938.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Audio waveform visualization with editing markers" loading="lazy">
-        <div class="img-label"><span>Waveform</span> Precision sample editing</div>
+        <img src="https://images.pexels.com/photos/164938/pexels-photo-164938.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Audio waveform editing" loading="lazy">
+        <div class="img-label"><span>Waveform</span> Sample precision</div>
       </div>
       <div class="showcase-img short">
-        <img src="https://images.pexels.com/photos/6953876/pexels-photo-6953876.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Podcast microphone with pop filter in recording studio" loading="lazy">
-        <div class="img-label"><span>Mastering</span> Broadcast-ready output</div>
+        <img src="https://images.pexels.com/photos/6953876/pexels-photo-6953876.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Podcast recording studio" loading="lazy">
+        <div class="img-label"><span>Mastering</span> Broadcast-ready</div>
       </div>
     </div>
   </div>
@@ -1253,17 +1249,17 @@
   <div class="feature-section-inner">
     <div class="section-header reveal">
       <h2><span class="grad-text">Photo</span> Editing</h2>
-      <p>Transform your photos into stunning masterpieces</p>
+      <p>Transform images with AI-powered retouching and color grading</p>
     </div>
     
     <div class="feat-photo-row reveal">
       <div>
         <div class="before-after" id="baSlider">
           <div class="ba-after">
-            <img src="https://images.pexels.com/photos/1680140/pexels-photo-1680140.jpeg?auto=compress&cs=tinysrgb&w=800&dpr=2" alt="Color graded sunset landscape with vibrant colors" loading="lazy">
+            <img src="https://images.pexels.com/photos/1680140/pexels-photo-1680140.jpeg?auto=compress&cs=tinysrgb&w=800&dpr=2" alt="Color graded landscape" loading="lazy">
           </div>
           <div class="ba-before" id="baBefore">
-            <img src="https://images.pexels.com/photos/1680140/pexels-photo-1680140.jpeg?auto=compress&cs=tinysrgb&w=800&dpr=2" alt="Original flat sunset landscape before color grading" style="filter:saturate(0.15) brightness(0.9)" loading="lazy">
+            <img src="https://images.pexels.com/photos/1680140/pexels-photo-1680140.jpeg?auto=compress&cs=tinysrgb&w=800&dpr=2" alt="Original landscape" style="filter:saturate(0.15) brightness(0.9)" loading="lazy">
           </div>
           <div class="ba-tag before">Before</div>
           <div class="ba-tag after">After</div>
@@ -1272,25 +1268,25 @@
         </div>
       </div>
       <div class="feat-text">
-        <h3>Color Grading<br><em style="background:linear-gradient(120deg,var(--cyan),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-style:normal">That Transforms</em></h3>
-        <p>Drag the slider to see the difference. Our cinema-grade color tools turn flat, dull footage into vivid, emotionally-charged visuals — in seconds.</p>
+        <h3>Cinema-Grade<br><em style="background:linear-gradient(135deg,var(--cyan),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-style:normal">Color Grading</em></h3>
+        <p>Professional color tools that transform flat images into vivid, emotionally-charged visuals. Drag the slider to see the difference.</p>
         <div class="feat-tags">
           <span class="feat-tag">HSL Curves</span>
-          <span class="feat-tag">LUT Library</span>
-          <span class="feat-tag">Skin Tone Protection</span>
-          <span class="feat-tag">One-click Presets</span>
+          <span class="feat-tag">200+ LUTs</span>
+          <span class="feat-tag">Skin Tone AI</span>
+          <span class="feat-tag">One-Click Presets</span>
         </div>
       </div>
     </div>
 
-    <div class="photo-showcase hero-split reveal" style="margin-top:1.5rem">
-      <div class="showcase-img wide">
-        <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=800&dpr=2" alt="Professional portrait retouching with natural skin enhancement" loading="lazy">
-        <div class="img-label"><span>AI Retouch</span> Portrait enhancement</div>
+    <div class="photo-showcase hero-split reveal" style="margin-top:2rem">
+      <div class="showcase-img" style="aspect-ratio:16/9">
+        <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=800&dpr=2" alt="Portrait retouching" loading="lazy">
+        <div class="img-label"><span>AI Retouch</span> Natural enhancement</div>
       </div>
-      <div class="showcase-img square">
-        <img src="https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Product photography with batch editing workflow" loading="lazy">
-        <div class="img-label"><span>Batch</span> Product photography</div>
+      <div class="showcase-img" style="aspect-ratio:1">
+        <img src="https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Product photography" loading="lazy">
+        <div class="img-label"><span>Batch</span> Product editing</div>
       </div>
     </div>
   </div>
@@ -1301,37 +1297,37 @@
   <div class="feature-section-inner">
     <div class="section-header reveal">
       <h2><span class="grad-text">Video</span> Editing</h2>
-      <p>Create professional cinematic videos that stand out</p>
+      <p>Professional cinematic editing with real-time 4K playback</p>
     </div>
 
     <div class="feat-photo-row flip reveal">
-      <div class="showcase-img wide" style="aspect-ratio:16/9">
-        <img src="https://images.pexels.com/photos/2873486/pexels-photo-2873486.jpeg?auto=compress&cs=tinysrgb&w=800&dpr=2" alt="Cinematic video editing workspace with multi-track timeline" loading="lazy">
-        <div class="img-label"><span>4K Timeline</span> Multi-track cinematic editing</div>
+      <div class="showcase-img" style="aspect-ratio:16/9">
+        <img src="https://images.pexels.com/photos/2873486/pexels-photo-2873486.jpeg?auto=compress&cs=tinysrgb&w=800&dpr=2" alt="Video editing timeline" loading="lazy">
+        <div class="img-label"><span>4K Timeline</span> Multi-track editing</div>
       </div>
       <div class="feat-text">
-        <h3>Edit at the<br><em style="background:linear-gradient(120deg,var(--violet),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-style:normal">Speed of Thought</em></h3>
-        <p>A timeline that keeps up with your creativity. Real-time 4K playback, magnetic timeline snapping, and intelligent clip management let you focus on the story.</p>
+        <h3>Edit at the<br><em style="background:linear-gradient(135deg,var(--violet),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-style:normal">Speed of Thought</em></h3>
+        <p>Real-time 4K playback, magnetic timeline snapping, and intelligent clip management. Focus on storytelling, not rendering.</p>
         <div class="feat-tags">
-          <span class="feat-tag">4K / 8K Playback</span>
-          <span class="feat-tag">Magnetic Timeline</span>
+          <span class="feat-tag">4K / 8K Ready</span>
           <span class="feat-tag">200+ Effects</span>
-          <span class="feat-tag">Keyframe Animation</span>
+          <span class="feat-tag">Keyframe Engine</span>
+          <span class="feat-tag">Auto Sync</span>
         </div>
       </div>
     </div>
     
-    <div class="photo-showcase triple reveal" style="margin-top:1.5rem">
+    <div class="photo-showcase triple reveal" style="margin-top:2rem">
       <div class="showcase-img short">
-        <img src="https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Music video production with color grading" loading="lazy">
-        <div class="img-label"><span>Video</span> Music video edit</div>
+        <img src="https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Music video production" loading="lazy">
+        <div class="img-label"><span>Video</span> Music video</div>
       </div>
       <div class="showcase-img short">
-        <img src="https://images.pexels.com/photos/2608517/pexels-photo-2608517.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Cinema-grade color grading with LUT application" loading="lazy">
-        <div class="img-label"><span>Color</span> Cinema grade LUTs</div>
+        <img src="https://images.pexels.com/photos/2608517/pexels-photo-2608517.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Color grading" loading="lazy">
+        <div class="img-label"><span>Color</span> Cinema LUTs</div>
       </div>
       <div class="showcase-img short">
-        <img src="https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Animated motion graphics and titles" loading="lazy">
+        <img src="https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2" alt="Motion graphics" loading="lazy">
         <div class="img-label"><span>Motion</span> Animated titles</div>
       </div>
     </div>
@@ -1342,11 +1338,11 @@
 <div id="gallery">
   <div class="gallery-inner">
     <div class="section-header reveal">
-      <h2><span class="grad-text">Project</span> Gallery</h2>
-      <p>Showcase of creations made with Zenframe</p>
+      <h2><span class="grad-text">Project</span> Showcase</h2>
+      <p>Real work from professional creators using Zenframe</p>
     </div>
     <div class="filter-bar">
-      <button class="fbtn active" data-filter="all">All</button>
+      <button class="fbtn active" data-filter="all">All Work</button>
       <button class="fbtn" data-filter="photo">Photo</button>
       <button class="fbtn" data-filter="video">Video</button>
       <button class="fbtn" data-filter="audio">Audio</button>
@@ -1357,10 +1353,10 @@
 </div>
 
 <!-- STATS -->
-<div style="padding:60px 0">
+<div style="padding:80px 0">
   <div class="stats-row reveal">
     <div class="stat-cell"><div class="stat-num">500K+</div><div class="stat-lbl">Active Creators</div></div>
-    <div class="stat-cell"><div class="stat-num">4.9★</div><div class="stat-lbl">Average Rating</div></div>
+    <div class="stat-cell"><div class="stat-num">4.9★</div><div class="stat-lbl">User Rating</div></div>
     <div class="stat-cell"><div class="stat-num">99.9%</div><div class="stat-lbl">Uptime SLA</div></div>
     <div class="stat-cell"><div class="stat-num">24/7</div><div class="stat-lbl">Support</div></div>
   </div>
@@ -1370,8 +1366,8 @@
 <div id="pricing">
   <div class="pricing-inner">
     <div class="section-header reveal" style="text-align:center">
-      <h2>Simple <span class="grad-text">Pricing</span></h2>
-      <p style="max-width:none">Choose the perfect plan for your needs</p>
+      <h2>Transparent <span class="grad-text">Pricing</span></h2>
+      <p style="max-width:none">Choose the plan that scales with your creative ambitions</p>
     </div>
     <div class="pricing-grid reveal">
       <div class="price-card">
@@ -1379,14 +1375,14 @@
         <div class="price-amount">$0</div>
         <div class="price-desc">Perfect to get started</div>
         <ul class="price-feats">
-          <li>Basic editing tools</li>
-          <li>2GB storage</li>
+          <li>Core editing tools</li>
+          <li>2GB cloud storage</li>
           <li>Limited exports</li>
         </ul>
         <button class="price-btn ghost" data-plan="free">Get Started</button>
       </div>
       <div class="price-card featured">
-        <div class="price-badge">Most popular</div>
+        <div class="price-badge">Most Popular</div>
         <div class="price-tier">Pro</div>
         <div class="price-amount"><sup>$</sup>19<sub>/mo</sub></div>
         <div class="price-desc">For serious creators</div>
@@ -1406,7 +1402,7 @@
           <li>Everything in Pro</li>
           <li>2TB storage</li>
           <li>Team collaboration</li>
-          <li>Dedicated support</li>
+          <li>Dedicated account manager</li>
         </ul>
         <button class="price-btn ghost" data-plan="studio">Contact Sales</button>
       </div>
@@ -1417,20 +1413,17 @@
 <!-- PAYMENT SECTION -->
 <div id="payment">
   <div class="demo-notice reveal">
-    <div class="demo-badge">Demo Only</div>
-    <h3>Payment Integration Coming Soon</h3>
-    <p>This is a UI demonstration showcasing modern payment interface design. In production, this would integrate with Stripe or PayPal for secure, PCI-compliant payment processing.</p>
-    <p style="margin-top:1rem;font-size:0.8rem">⚠️ <strong>Never enter real payment details on demo sites.</strong> This form does not process or store any payment information.</p>
+    <div class="demo-badge">Demo Interface</div>
+    <h3>Payment Integration In Development</h3>
+    <p>This is a demonstration of modern payment UI/UX design. In production, this would integrate with Stripe or PayPal for secure, PCI-compliant payment processing with enterprise-grade encryption.</p>
+    <p style="margin-top:1.25rem;font-size:0.85rem;color:var(--pink)">⚠️ <strong>Security Notice:</strong> Never enter real payment credentials on demonstration websites.</p>
   </div>
 </div>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-brand">
-    <img src="https://messages-prod.27c852f3500f38c1e7786e2c9ff9e48f.r2.cloudflarestorage.com/019d9f6d-33c2-72f7-ab98-354d00929c8f/1778952601953-019e31d6-2d74-7738-a679-ac8a09d77044.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=b33de61d4f22a31b59b25364ab5037c5%2F20260516%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260516T173002Z&X-Amz-Expires=3600&X-Amz-Signature=e7a447c15ceb616ece10ab1485677f8749f82f10a632d1f2e8d2cb281fa60545&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject" alt="Brand Logo" class="footer-image">
-    <div class="footer-logo">Zenframe</div>
-  </div>
-  <p>© 2024 Zenframe. Empowering creators worldwide with professional-grade tools.</p>
+  <div class="footer-logo">Zenframe</div>
+  <p>© 2024 Zenframe. Professional creative tools trusted by 500,000+ creators worldwide.<br>Empowering the next generation of visual storytellers.</p>
 </footer>
 
 <script>
@@ -1453,7 +1446,6 @@ const quotes=[
   {t:'"In editing, there\'s no room for ego. The film dictates what should be cut, and we listen."',a:'— Ralph Rosenblum, Pioneering Film Editor'},
   {t:'"Color grading is like conducting an orchestra. Precision, timing, and emotion."',a:'— David Fincher, Director'},
   {t:'"Good editing makes the audience forget they\'re watching an edit. They just feel the story."',a:'— Michael Kahn, A.C.E. Editor'},
-  {t:'"The power of editing is to make the invisible visible."',a:'— Marty Cohen, Award-Winning Editor'},
 ];
 let qi=0;
 const qDots=document.getElementById('q-dots');
@@ -1474,7 +1466,7 @@ function goQ(idx){
     document.querySelectorAll('.qdot').forEach((d,i)=>d.classList.toggle('active',i===qi));
   },350);
 }
-setInterval(()=>goQ((qi+1)%quotes.length),5000);
+setInterval(()=>goQ((qi+1)%quotes.length),6000);
 
 // ─── SCROLL NAV ───
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
@@ -1534,14 +1526,14 @@ function showFreePlanError() {
   
   content.innerHTML = `
     <div class="free-modal-spinner">
-      <svg width="64" height="64" viewBox="0 0 64 64">
-        <circle cx="32" cy="32" r="28" fill="none" stroke="rgba(0,229,255,0.15)" stroke-width="4"/>
-        <circle cx="32" cy="32" r="28" fill="none" stroke="var(--cyan)" stroke-width="4" 
-                stroke-dasharray="44 132" stroke-linecap="round"/>
+      <svg width="72" height="72" viewBox="0 0 72 72">
+        <circle cx="36" cy="36" r="32" fill="none" stroke="rgba(0,229,255,0.15)" stroke-width="4"/>
+        <circle cx="36" cy="36" r="32" fill="none" stroke="var(--cyan)" stroke-width="4" 
+                stroke-dasharray="50 150" stroke-linecap="round"/>
       </svg>
     </div>
-    <div class="free-modal-title">Redirecting to Your Dashboard...</div>
-    <div class="free-modal-text">Please wait while we set up your free account</div>
+    <div class="free-modal-title">Redirecting to Dashboard...</div>
+    <div class="free-modal-text">Setting up your free account</div>
     <div class="free-modal-timer" id="freeTimer">10</div>
   `;
   
@@ -1559,7 +1551,7 @@ function showFreePlanError() {
       setTimeout(() => {
         content.innerHTML = `
           <div class="wifi-icon">📡</div>
-          <div class="free-modal-error-title">OOPS! SERVER PROBLEM</div>
+          <div class="free-modal-error-title">SERVER ERROR</div>
           <div class="free-modal-text" style="color:#f87171;font-weight:600;">
             Unable to connect to server
           </div>
@@ -1569,7 +1561,7 @@ function showFreePlanError() {
           <button class="free-modal-btn" onclick="closeFreeModal()">
             Try Again
           </button>
-          <p style="margin-top:1rem;font-size:0.8rem;color:var(--muted);">
+          <p style="margin-top:1.5rem;font-size:0.85rem;color:var(--muted);">
             Error Code: ERR_CONNECTION_TIMEOUT
           </p>
         `;
@@ -1603,15 +1595,15 @@ document.getElementById('freePlanModal')?.addEventListener('click', function(e) 
 // ─── GALLERY ───
 const galleryData=[
   {title:'Cinematic Sunset',sub:'Color grading',cat:'photo',img:'https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
-  {title:'Portrait Retouching',sub:'AI-enhanced beauty work',cat:'photo',img:'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2',wide:true,tall:true,featured:true},
-  {title:'Music Video Edit',sub:'4K cinematic editing',cat:'video',img:'https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
-  {title:'Podcast Production',sub:'Professional audio mix',cat:'audio',img:'https://images.pexels.com/photos/3587478/pexels-photo-3587478.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
-  {title:'Motion Design',sub:'3D animated titles',cat:'motion',img:'https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2',wide:true,featured:true},
-  {title:'Wedding Highlight',sub:'4K slow-mo sequences',cat:'video',img:'https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
-  {title:'Product Photography',sub:'E-commerce editing',cat:'photo',img:'https://images.pexels.com/photos/3962286/pexels-photo-3962286.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
-  {title:'Sound Design',sub:'Atmospheric audio layers',cat:'audio',img:'https://images.pexels.com/photos/3407617/pexels-photo-3407617.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
-  {title:'Brand Animation',sub:'Logo motion graphics',cat:'motion',img:'https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
-  {title:'Landscape Photography',sub:'Nature color grading',cat:'photo',img:'https://images.pexels.com/photos/1624496/pexels-photo-1624496.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
+  {title:'Portrait Retouching',sub:'AI-enhanced',cat:'photo',img:'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2',wide:true,tall:true,featured:true},
+  {title:'Music Video',sub:'4K editing',cat:'video',img:'https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
+  {title:'Podcast Mix',sub:'Audio production',cat:'audio',img:'https://images.pexels.com/photos/3587478/pexels-photo-3587478.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
+  {title:'Motion Design',sub:'3D animation',cat:'motion',img:'https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2',wide:true,featured:true},
+  {title:'Wedding Film',sub:'Cinematic',cat:'video',img:'https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
+  {title:'Product Shoot',sub:'E-commerce',cat:'photo',img:'https://images.pexels.com/photos/3962286/pexels-photo-3962286.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
+  {title:'Sound Design',sub:'Atmospheric',cat:'audio',img:'https://images.pexels.com/photos/3407617/pexels-photo-3407617.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
+  {title:'Brand Logo',sub:'Motion graphics',cat:'motion',img:'https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
+  {title:'Landscape',sub:'Nature',cat:'photo',img:'https://images.pexels.com/photos/1624496/pexels-photo-1624496.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2'},
 ];
 
 function renderGallery(filter){
@@ -1635,7 +1627,7 @@ function renderGallery(filter){
       grid.appendChild(d);
     });
     grid.style.opacity='1';
-  }, 200);
+  }, 250);
 }
 
 document.querySelector('.filter-bar')?.addEventListener('click', e => {
@@ -1706,7 +1698,7 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if(e.isIntersecting) e.target.classList.add('on');
   });
-}, {threshold: 0.12, rootMargin: '0px 0px -40px 0px'});
+}, {threshold: 0.15, rootMargin: '0px 0px -60px 0px'});
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
